@@ -1,0 +1,343 @@
+协议说明:
+	我们尽量采用ajax的方式来访问数据。
+	参数兼容get、post的方式。
+	返回值是一个json格式的数据结构，例如{"data":[{"tdate":"2018-04-16","step":1000,"did":"589467020039582"},{"tdate":"2018-04-17","step":1000,"did":"589467020039640"}],"err":""}
+	err字段描述错误信息，当不为空的时候，即发生了错误，可以直接把err的字符串信息打印出来
+	data字段是根据不同协议返回的不同数据结构
+
+1.登录
+	api：http://wx.atunala.com/admin/admin/login?name=admin&pwd=xxxxx
+	参数：name 帐号名  pwd 密码（md5加密）
+		测试账号 admin  密码 000000
+	返回值: {"data":{"level":1,"name":"admin","id":1,"pwd":"xxx"},"err":""}
+		level：管理等级
+		name：账号名
+		id：管理员id
+
+2.获取设备列表
+	api：http://wx.atunala.com/admin/devic/list
+	参数：
+		name : 设备名id 可选
+		bindcode : 绑定的羊的id 可选
+		bindname : 绑定的羊的名字 可选
+		page : 第几页  每页20
+	返回值: {"data":{"arr":[{"update_time":"2018-04-16 21:28:30","bindname":"","bindtime":null,"name":"589467020039582","id":1,"detail":"","power":86,"bindcode":""},{"update_time":"2018-04-23 02:00:41","bindname":"","bindtime":null,"name":"589467020039640","id":7,"detail":"","power":2,"bindcode":""},{"update_time":"2018-04-25 15:44:30","bindname":"","bindtime":null,"name":"589467020039624","id":1540,"detail":"","power":91,"bindcode":""}],"count":3},"err":""}
+		id：设备id
+		name : 设备名id
+		bindcode : 绑定的物件编号
+		bindname : 绑定的羊的名字 
+		update_time：更新时间
+		bindtime：绑定时间
+		power: 设备电量
+	
+3.添加设备
+	api：http://wx.atunala.com/admin/device/add
+	参数：
+		name : 设备标记id
+	返回值{"data":{"name":"11","id":3102},"err":""}
+		id：设备id
+		name： 设备名
+	
+4.绑定设备
+	api：http://wx.atunala.com/admin/device/bind?id=3100&bindcode=124&bindname=我是羊&detail=为什么羊绑定呢
+	参数：
+		id : 设备id
+		bindcode：绑定的物件编号
+		bindname：绑定的物件名
+		detai：描述 可选
+	返回值 {"data":{},"err":""}
+		
+5.删除设备
+	api：http://wx.atunala.com/admin/device/delete?id=3098
+		参数：id: 设备id
+		返回值：{"data":{},"err":""}
+
+6.获取订单列表
+	api：http://wx.atunala.com/admin/order/list?paytype=1
+	参数：
+		uid: 用户id 可选
+		payType： 支付类型 1 微信支付， 2 ETH支付  可选
+		addr: 送货地址 可选
+		name: 姓名 可选
+		pid: 商品id 可选
+		state ：订单状态 1为代付款，2为未发货 3为已发货 4为完成，0为取消 可选
+		paystate : 支付状态，0 为未支付，1为已支付  可选
+		page : 第几页  每页20
+	返回值：{"data":{"arr":[{"msg":"ç\u0095\u0099è¨\u0080äº\u0086","create_time":null,"count":1,"pid":1,"paystate":0,"trackno":"","qid":0,"pay_time":null,"uid":5,"send_time":null,"price":0.01,"extra":"","eth":0.88,"name":"wffff","payment":null,"id":14,"state":1,"realprice":0.01,"addr":"å®\u0089å¾½ç\u009C\u0081/è\u008A\u009Cæ¹\u0096å¸\u0082/å¼\u008Bæ±\u009Få\u008Cºè¡\u0097é\u0081\u0093","paytype":1},{"msg":"ç\u0095\u0099è¨\u00804ä»¶","create_time":null,"count":4,"pid":1,"paystate":0,"trackno":"","qid":0,"pay_time":"2018-04-24 19:03:52","uid":5,"send_time":null,"price":0.04,"extra":"141234834912834135|141234834912834136","eth":0.88,"name":"WFF","payment":0.04,"id":13,"state":2,"realprice":0.04,"addr":"å®\u0089å¾½ç\u009C\u0081/è\u008A\u009Cæ¹\u0096å¸\u0082/å¼\u008Bæ±\u009Få\u008Cºå\u0093¦å\u0093¦å\u0093¦","paytype":1},{"msg":"æ\u0088\u0091æ\u0098¯ç\u0095\u0099è¨\u0080","create_time":null,"count":1,"pid":1,"paystate":0,"trackno":"","qid":0,"pay_time":"2018-04-24 00:44:26","uid":6,"send_time":null,"price":0.01,"extra":"141234834912834134","eth":0.88,"name":"æ\u0088\u0091æ\u0098¯å\u0090\u008Då­\u0097","payment":0.01,"id":2,"state":2,"realprice":0.01,"addr":"æ\u0088\u0091æ\u0098¯å\u009C°å\u009D\u0080","paytype":1}],"count":3},"err":""}
+		id: 订单id
+		uid: 用户id
+		count： 购买数量
+		payType： 支付类型 1 微信支付， 2 ETH支付
+		addr: 送货地址
+		name: 姓名
+		msg: 留言
+		pid: 商品id
+		qid：优惠券id
+		price : 合计价格
+		realprice : 最终价格
+		eth : ETH支付价格
+		state ：订单状态 1为代付款，2为未发货 3为已发货 4为完成，0为取消
+		paystate : 支付状态，0 为未支付，1为已支付
+		payment : 支付金额
+		create_time: 创建时间
+		pay_time:支付时间
+		extra: 羊的信息
+		trackno： 快递单号
+		send_time ：发货时间
+
+7.手动对账
+	api: http://wx.atunala.com/admin/order/payed?oid=3100&payment=1
+	参数：
+		oid： 订单id
+		payment: 支付金额
+	返回值: {"data":{"msg":"ç\u0095\u0099è¨\u0080äº\u0086","create_time":null,"count":1,"pid":1,"paystate":1,"trackno":"","qid":0,"pay_time":"2018-04-25 22:24:28","uid":5,"send_time":null,"price":0.01,"extra":"","eth":0.88,"name":"wffff","payment":0.0,"id":14,"state":2,"realprice":0.01,"addr":"å®\u0089å¾½ç\u009C\u0081/è\u008A\u009Cæ¹\u0096å¸\u0082/å¼\u008Bæ±\u009Få\u008Cºè¡\u0097é\u0081\u0093","paytype":1},"err":""}
+		id: 订单id
+		uid: 用户id
+		count： 购买数量
+		payType： 支付类型 1 微信支付， 2 ETH支付
+		addr: 送货地址
+		name: 姓名
+		msg: 留言
+		pid: 商品id
+		qid：优惠券id
+		price : 合计价格
+		realprice : 最终价格
+		eth : ETH支付价格
+		state ：订单状态 1为代付款，2为未发货 3为已发货 4为完成，0为取消
+		paystate : 支付状态，0 为未支付，1为已支付
+		payment : 支付金额
+		create_time: 创建时间
+		pay_time:支付时间
+		extra: 羊的信息
+		trackno： 快递单号
+		send_time ：发货时间
+
+8.发货
+	api: http://wx.atunala.com/admin/order/send?oid=3100&trackno=112123
+	参数：
+		oid: 订单id
+		trackno: 快递单号
+	返回值：{"data":{"msg":"ç\u0095\u0099è¨\u0080äº\u0086","create_time":null,"count":1,"pid":1,"paystate":1,"trackno":"1212121","qid":0,"pay_time":"2018-04-25 22:24:28","uid":5,"send_time":"2018-04-25 22:30:10","price":0.01,"extra":"","eth":0.88,"name":"wffff","payment":0.0,"id":14,"state":3,"realprice":0.01,"addr":"å®\u0089å¾½ç\u009C\u0081/è\u008A\u009Cæ¹\u0096å¸\u0082/å¼\u008Bæ±\u009Få\u008Cºè¡\u0097é\u0081\u0093","paytype":1},"err":""}
+		id: 订单id
+		uid: 用户id
+		count： 购买数量
+		payType： 支付类型 1 微信支付， 2 ETH支付
+		addr: 送货地址
+		name: 姓名
+		msg: 留言
+		pid: 商品id
+		qid：优惠券id
+		price : 合计价格
+		realprice : 最终价格
+		eth : ETH支付价格
+		state ：订单状态 1为代付款，2为未发货 3为已发货 4为完成，0为取消
+		paystate : 支付状态，0 为未支付，1为已支付
+		payment : 支付金额
+		create_time: 创建时间
+		pay_time:支付时间
+		extra: 羊的信息
+		trackno： 快递单号
+		send_time ：发货时间
+
+9.订单完成
+	api：http://wx.atunala.com/admin/order/finish?oid=14
+	参数：
+		oid： 订单id
+	返回值：{"data":{"msg":"ç\u0095\u0099è¨\u0080äº\u0086","create_time":null,"count":1,"pid":1,"paystate":1,"trackno":"1212121","qid":0,"pay_time":"2018-04-25 22:24:28","uid":5,"send_time":"2018-04-25 22:30:10","price":0.01,"extra":"","eth":0.88,"name":"wffff","payment":0.0,"id":14,"state":4,"realprice":0.01,"addr":"å®\u0089å¾½ç\u009C\u0081/è\u008A\u009Cæ¹\u0096å¸\u0082/å¼\u008Bæ±\u009Få\u008Cºè¡\u0097é\u0081\u0093","paytype":1},"err":""}
+		id: 订单id
+		uid: 用户id
+		count： 购买数量
+		payType： 支付类型 0 微信支付， 1 ETH支付
+		addr: 送货地址
+		name: 姓名
+		msg: 留言
+		pid: 商品id
+		qid：优惠券id
+		price : 合计价格
+		realprice : 最终价格
+		eth : ETH支付价格
+		state ：订单状态 1为代付款，2为未发货 3为已发货 4为完成，0为取消
+		paystate : 支付状态，0 为未支付，1为已支付
+		payment : 支付金额
+		create_time: 创建时间
+		pay_time:支付时间
+		extra: 羊的信息
+		
+
+10.订单关闭
+	api：http://wx.atunala.com/admin/order/close?oid=12
+	参数：
+		oid： 订单id
+	返回值：{"data":{"msg":"12321","create_time":null,"count":1,"pid":1,"paystate":0,"trackno":"","qid":0,"pay_time":null,"uid":5,"send_time":null,"price":0.01,"extra":"","eth":0.88,"name":"213","payment":null,"id":12,"state":0,"realprice":0.01,"addr":"å®\u0089å¾½ç\u009C\u0081/é©¬é\u009E\u008Då±±å¸\u0082/é\u009B¨å±±å\u008Cº123213","paytype":0},"err":""}
+		id: 订单id
+		uid: 用户id
+		count： 购买数量
+		payType： 支付类型 0 微信支付， 1 ETH支付
+		addr: 送货地址
+		name: 姓名
+		msg: 留言
+		pid: 商品id
+		qid：优惠券id
+		price : 合计价格
+		realprice : 最终价格
+		eth : ETH支付价格
+		state ：订单状态 1为代付款，2为未发货 3为已发货 4为完成，0为取消
+		paystate : 支付状态，0 为未支付，1为已支付
+		payment : 支付金额
+		create_time: 创建时间
+		pay_time:支付时间
+		extra: 羊的信息
+	
+11.商品列表
+	api：http://wx.atunala.com/admin/product/list
+	参数：
+		name: 商品名  可选
+		page: 第几页  每页20
+	返回值：{"data":{"arr":[{"send_date":"2018-12-01","price":0.01,"eth":0.88,"count":481,"name":"六月羔羊 预售","expire_time":"2018-05-31 00:00:00","id":1}],"count":1},"err":""}
+		id: 商品id
+		send_date:发货时间
+		price：rmb价格
+		eth: eth价格
+		count: 剩余数量
+		name: 商品名
+		expire_time: 截止时间
+		
+12.添加商品 - 暂时隐藏
+	api：http://wx.atunala.com/admin/product/add
+	参数：
+		send_date:发货时间
+		price：rmb价格
+		eth: eth价格
+		count: 剩余数量
+		name: 商品名
+		expire_time: 截止时间
+	返回值：{"data":{"arr":[{"send_date":"2018-12-01","price":0.01,"eth":0.88,"count":481,"name":"六月羔羊 预售","expire_time":"2018-05-31 00:00:00","id":1}],"count":1},"err":""}
+		id: 商品id
+		send_date:发货时间
+		price：rmb价格
+		eth: eth价格
+		count: 剩余数量
+		name: 商品名
+		expire_time: 截止时间
+		
+13.修改商品
+	api：http://wx.atunala.com/admin/product/edit
+	参数：
+		id: 商品id
+		send_date:发货时间
+		price：rmb价格
+		eth: eth价格
+		count: 剩余数量
+		name: 商品名
+		expire_time: 截止时间
+	返回值：{"data":{"arr":[{"send_date":"2018-12-01","price":0.01,"eth":0.88,"count":481,"name":"六月羔羊 预售","expire_time":"2018-05-31 00:00:00","id":1}],"count":1},"err":""}
+		id: 商品id
+		send_date:发货时间
+		price：rmb价格
+		eth: eth价格
+		count: 剩余数量
+		name: 商品名
+		expire_time: 截止时间
+		
+14.优惠券列表
+	api：http://wx.atunala.com/admin/quan/list
+	参数
+		uid:用户id
+		page: 第几页  每页20
+	返回值：{"data":{"arr":[{"uid":5,"money":288.0,"create_time":"2018-04-23 23:44:26","name":"预售券","expire_time":"2020-12-31 00:00:00","id":2,"state":1},{"uid":6,"money":288.0,"create_time":"2018-04-23 23:44:16","name":"预售券","expire_time":"2020-12-31 00:00:00","id":1,"state":0}],"count":2},"err":""}
+		id: 优惠券id
+		uid: 用户id
+		name: 名称
+		money: 金额
+		state：状态
+		expire_time: 过期时间
+		create_time: 创建时间
+	
+15.羊的列表
+	api：http://wx.atunala.com/admin/sheep/list
+	参数
+		sid:羊的id
+		page: 第几页  每页20
+	返回值：{"data":{"arr":[{"update_time":"2018-04-24 19:03:52","id":3,"state":1,"sid":"141234834912834136"},{"update_time":"2018-04-24 19:03:52","id":2,"state":1,"sid":"141234834912834135"},{"update_time":"2018-04-24 00:44:26","id":1,"state":1,"sid":"141234834912834134"}],"count":3},"err":""}
+		id: 羊的id
+		sid: 编号
+		state: 状态 0为待售，1为已售
+		update_time: 更新时间
+
+16.添加羊
+	api：http://wx.atunala.com/admin/sheep/add
+	参数
+		sid:羊的编号
+	返回值：{"data":{"update_time":"2018-04-25 22:59:58","state":0,"id":4,"sid":"121212"},"err":""}
+		id: 羊的id
+		sid: 编号
+		state: 状态 0为待售，1为已售
+		update_time: 更新时间
+
+17.删除羊
+	api：http://wx.atunala.com/admin/sheep/delete
+	参数
+		id:羊的id
+	返回值：{"data":{"update_time":"2018-04-25 22:59:58","state":0,"id":4,"sid":"121212"},"err":""}
+		id: 羊的id
+		sid: 编号
+		state: 状态 0为待售，1为已售
+		update_time: 更新时间
+	
+18.用户列表
+	api：http://wx.atunala.com/admin/user/list
+	参数	
+		inviteid：邀请者 可选
+		phone：手机号 可选
+		name：用户名 可选
+		mail：邮箱地址 可选
+		page: 第几页  每页20
+	返回值
+		{"data":{"arr":[{"update_time":"2018-04-23 17:01:42","money":0.0,"mail":"","phone":"18818235024","inviteid":0,"needcash":0.0,"name":"18818235024","id":5,"pwd":"e10adc3949ba59abbe56e057f20f883e","cash":0.0,"tokenaddr":"123213213213213213213213213211111111111111","coin":50.0},{"update_time":"2018-04-23 23:41:45","money":0.0,"mail":"","phone":"13301761400","inviteid":0,"needcash":0.0,"name":"13301761400","id":6,"pwd":"670b14728ad9902aecba32e22fa4f6bd","cash":0.0,"tokenaddr":"111111111111111111111111111111111111111111","coin":50.0}],"count":2},"err":""}
+		id：用户id
+		inviteid：邀请者id
+		phone：手机号
+		name：用户名
+		money：现金券
+		coin：atnl
+		update_time:最近修改时间
+		mail：邮箱地址
+		tokenaddr：token钱包地址
+		cash：已经提现了多少atnl token
+		needcash：申请了多少atnl token
+		
+19.日志列表
+	api：http://wx.atunala.com/admin/log/list
+	参数
+		uid: 管理员id
+		opt: 操作类型
+		msg：操作内容
+		from：从什么时候开始
+		to：到什么时候结束
+		page: 第几页  每页20
+	返回值：{"data":{"arr":[{"msg":"create shepp - id=4 sid=121212","uid":0,"opt":"sheep/create","id":11,"time":"2018-04-25 22:59:58"},{"msg":"close order - oid=12","uid":0,"opt":"order/close","id":10,"time":"2018-04-25 22:37:00"},{"msg":"finish order - oid=14","uid":0,"opt":"order/finish","id":9,"time":"2018-04-25 22:36:12"},{"msg":"send order - oid=14 trackno=1212121","uid":0,"opt":"order/send","id":8,"time":"2018-04-25 22:30:10"},{"msg":"payed order - oid=14 payment=0.0 extra=","uid":0,"opt":"order/payed","id":7,"time":"2018-04-25 22:24:28"},{"msg":"bind device - id=3098","uid":0,"opt":"device/delete","id":6,"time":"2018-04-25 22:05:53"},{"msg":"bind device - code=124 name=我是羊 detail=为什么羊绑定呢","uid":0,"opt":"device/bind","id":5,"time":"2018-04-25 22:05:16"},{"msg":"add device - id=3102 name=11","uid":0,"opt":"device/add","id":4,"time":"2018-04-25 21:57:51"},{"msg":"add device - id=3101 name=12344","uid":0,"opt":"device/add","id":3,"time":"2018-04-25 21:55:00"},{"msg":"add device - id=3100 name=12345","uid":0,"opt":"device/add","id":2,"time":"2018-04-25 21:54:05"}],"count":10},"err":""}
+		id: 日志id
+		uid: 操作的管理员
+		opt: 操作类型
+		msg：操作内容
+		time：操作时间
+		
+20.获取邀请活动设置
+	api: http://wx.atunala.com/admin/invite/get
+	参数 无
+	返回值：
+		id: id
+		reg: 注册奖励
+		invite: 邀请奖励
+		count：活动允许注册用户数
+21.修改邀请活动设置
+	api: http://wx.atunala.com/admin/invite/edit
+	参数：
+		reg: 注册奖励
+		invite: 邀请奖励
+		count：活动允许注册用户数
+	返回值
+		id: id
+		reg: 注册奖励
+		invite: 邀请奖励
+		count：活动允许注册用户数
