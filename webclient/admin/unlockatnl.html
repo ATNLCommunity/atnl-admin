@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>解锁atnl</title>
+    <link href="../resource/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resource/css/metisMenu.min.css" rel="stylesheet">
+    <link href="../resource/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../resource/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">阿图纳拉</a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user" style="left: 0">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="user.html"><i class="fa fa-user-md fa-fw"></i>用户管理</a>
+                    </li>
+                    <li>
+                        <a href="product.html"><i class="fa fa-calendar fa-fw"></i>商品管理</a>
+                    </li>
+
+                    <li>
+                        <a href="order.html"><i class="fa fa-list fa-fw"></i>订单管理</a>
+                    </li>
+                    <li>
+                        <a href="quan.html"><i class="fa fa-level-down fa-fw"></i>优惠券管理</a>
+                    </li>
+                    <li>
+                        <a href="cash.html"><i class="fa fa-calendar-minus-o fa-fw"></i>提现管理</a>
+                    </li>
+                    <li>
+                        <a href="sheep.html"><i class="fa fa-hand-spock-o fa-fw"></i>羊羔管理</a>
+                    </li>
+                    <li>
+                        <a href="device.html"><i class="fa fa-paper-plane fa-fw"></i>设备管理</a>
+                    </li>
+                    <li>
+                        <a href="invite.html"><i class="fa fa-calendar-minus-o fa-fw"></i>注册设置</a>
+                    </li>
+                    <li>
+                        <a href="rank.html"><i class="fa fa-calendar-minus-o fa-fw"></i>邀请排行榜</a>
+                    </li>
+                    <li>
+                        <a href="log.html"><i class="fa fa-calendar-minus-o fa-fw"></i>日志管理</a>
+                    </li>
+                    <li>
+                        <a href="unlockatnl.html"><i class="fa fa-calendar-minus-o fa-fw"></i>解锁ATNL</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">ATNL操作</h3>
+            </div>
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h4>当前服务器总计</h4>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="20%">锁定ATNL</th>
+                            <th width="20%">解锁ATNL</th>
+                        </tr>
+                        </thead>
+                        <tbody id="">
+                        <tr id="serCount">
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h4>增加/减少ATNL</h4>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="20%">用户</th>
+                            <th width="20%">添加/减少数量</th>
+                            <th width="20%">类型</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="tBody">
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" id="uid" placeholder="用户ID">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="count" placeholder="输入数量">
+                            </td>
+                            <td>
+                                <select class="form-control" id="type">
+                                    <option value="0">未解锁</option>
+                                    <option value="1">已解锁</option>
+                                </select>
+                            </td>
+                            <td>
+                                <botton class="btn btn-danger" id="addBtn">增加</botton>
+                                <botton class="btn btn-danger" id="redBtn">减少</botton>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h4>解锁</h4>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="20%">解锁数量</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" id="unlockConut" placeholder="输入解锁数量">
+                            </td>
+                            <td>
+                                <botton class="btn btn-danger" id="unlockBtn">给全部用户解锁</botton>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--解锁确认模态框-->
+<div class="modal fade" id="unlockModal" tabindex="-1" role="dialog" aria-labelledby="unlockModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="unlockModalLabel">请输入管理密码确认操作！</h4>
+            </div>
+            <div class="modal-body">
+                <input type="password" class="form-control" id="pwd" placeholder="请输入管理密码">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="unlockSubBtn">确定</button>
+                <div class="alert alert-danger" id="pBox" hidden>数据处理中，请耐心等待。切勿刷新页面重复提交。</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../resource/js/jquery.min.js"></script>
+<script src="../resource/js/bootstrap.min.js"></script>
+<script src="../resource/js/metisMenu.min.js"></script>
+<script src="../resource/js/sb-admin-2.min.js"></script>
+<script src="../resource/js/utils.js"></script>
+<script src="../resource/js/md5.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        post_admin('quan/list', {page: 0, uid: 1}, function (data) {
+            if (data.err != "") {
+                if (data.err == "无效的操作") {
+                    window.location.href = "login.html"
+                }
+            } else {
+
+            }
+        });
+
+        post_admin('admin/atnl', {}, function (data) {
+            if (data.err != "") {
+                alert(data.err)
+            } else {
+                $("#serCount").html('<td>' + data.data.lockatnl + '</td><td>' + data.data.atnl + '</td>')
+            }
+        });
+
+        //增加
+        $("#addBtn").click(function () {
+            var uid = $("#uid").val();
+            var atnl = $("#count").val();
+            var type = $("#type").val();
+
+            post_admin('user/addatnl', {uid: uid, atnl: atnl, type: type}, function (data) {
+                if (data.err != "") {
+                    if (data.err == "无效的操作") {
+                        window.location.href = "login.html"
+                    } else {
+                        alert(data.err);
+                    }
+                } else {
+                    alert('增加成功！');
+                }
+            });
+        });
+
+        $("#redBtn").click(function () {
+            var uid = $("#uid").val();
+            var atnl = $("#count").val();
+            var type = $("#type").val();
+
+            post_admin('user/delatnl', {uid: uid, atnl: atnl, type: type}, function (data) {
+                if (data.err != "") {
+                    if (data.err == "无效的操作") {
+                        window.location.href = "login.html"
+                    } else {
+                        alert(data.err);
+                    }
+                } else {
+                    alert('扣除成功！')
+                }
+            });
+        });
+
+
+        //解锁
+        $("#unlockBtn").click(function () {
+            var count = $("#unlockConut").val();
+            if (count == "") {
+                alert("请输入数量");
+            } else {
+                var r = confirm("当前操作会给全部用户解锁" + count + "ATNL，若想取消操作点击取消按钮！");
+                if (r == true) {
+                    $('#unlockModal').modal("show");
+                    $('#unlockModal').on('hidden.bs.modal', function () {
+                        alert("您已取消操作!");
+                    })
+                } else {
+                    alert("您已取消操作!");
+                }
+            }
+        });
+
+
+        //确认解锁
+        $("#unlockSubBtn").click(function () {
+            $("#pBox").removeAttr("hidden");
+            var count = $("#unlockConut").val();
+            var pwd = md5($("#pwd").val());
+            post_admin_af('user/unlock', {atnl: count, pwd: pwd}, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    alert("操作成功!");
+                    location.reload();
+                }
+            });
+        })
+    });
+
+</script>
+</body>
+
+</html>

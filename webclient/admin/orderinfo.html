@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>订单详情</title>
+
+    <link href="../resource/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resource/css/metisMenu.min.css" rel="stylesheet">
+    <link href="../resource/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../resource/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th style="width: 20%">列1</th>
+        <th>列2</th>
+    </tr>
+    </thead>
+    <tbody id="tBody">
+    <tr><td>订单id</td><td id="id"></td></tr>
+    <tr><td>用户id</td><td id="uid"></td></tr>
+    <tr><td>联系人</td><td id="name"></td></tr>
+    <tr><td>联系电话</td><td id="contacts"></td></tr>
+    <tr><td>地址</td><td id="addr"></td></tr>
+    <tr><td>留言</td><td id="msg"></td></tr>
+    <tr><td>商品id</td><td id="pid"></td></tr>
+    <tr><td>数量</td><td id="count"></td></tr>
+    <tr><td>商品单价RMB</td><td id="price"></td></tr>
+    <tr><td>eth价格</td><td id="eth"></td></tr>
+    <tr><td>atnl价格</td><td id="atnlpay"></td></tr>
+    <tr><td>优惠券id</td><td id="qid"></td></tr>
+    <tr><td>实际应付金额</td><td id="realprice"></td></tr>
+    <tr><td>实际支付金额</td><td id="orderPayment"></td></tr>
+    <tr><td>支付方式</td><td id="paytype"></td></tr>
+    <tr><td>支付状态</td><td id="paystate"></td></tr>
+    <tr><td>订单状态</td><td id="state"></td></tr>
+    <tr><td>创建时间</td><td id="create_time"></td></tr>
+    <tr><td>支付时间</td><td id="pay_time"></td></tr>
+    <tr><td>发货时间</td><td id="send_time"></td></tr>
+    <tr><td>订单号</td><td id="orderTrackno"></td></tr>
+    <tr><td>羊的编号</td><td id="extra"></td></tr>
+    <tr><td>操作</td><td id="btn"></td></tr>
+    </tbody>
+</table>
+
+<!--手动对账模态框 -->
+<div class="modal fade" id="payedModal" tabindex="-1" role="dialog" aria-labelledby="payedModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="payedModalLabel">手动对账</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="payedOid" class="control-label">订单ID:</label>
+                    <input type="text" class="form-control" readonly id="payedOid">
+                </div>
+                <div class="form-group">
+                    <label for="payment" class="control-label">支付金额:</label>
+                    <input type="text" class="form-control" id="payment">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="btnPayedSub">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--发货模态框 -->
+<div class="modal fade" id="sendModal" tabindex="-1" role="dialog"
+     aria-labelledby="sendModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="sendModalLabel">发货</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="sendOid" class="control-label">订单ID:</label>
+                    <input type="text" class="form-control" readonly id="sendOid">
+                </div>
+                <div class="form-group">
+                    <label for="trackno" class="control-label">快递单号:</label>
+                    <input type="text" class="form-control" id="trackno">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="btnSendSub">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--订单完成模态框-->
+<div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="finishModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="finishModalLabel">订单完成</h4>
+            </div>
+            <div class="modal-body">
+                确定完成订单<span id="finishOid"></span>吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="btnFinishSub">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--订单关闭模态框-->
+<div class="modal fade" id="closeModal" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="closeModalLabel">订单完成</h4>
+            </div>
+            <div class="modal-body">
+                确定关闭订单<span id="closeOid"></span>吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="btnCloseSub">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../resource/js/jquery.min.js"></script>
+<script src="../resource/js/bootstrap.min.js"></script>
+<script src="../resource/js/metisMenu.min.js"></script>
+<script src="../resource/js/sb-admin-2.min.js"></script>
+<script src="../resource/js/utils.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var oid = getParam('oid');
+        post_admin('order/get', {
+            oid:oid
+        }, function (data) {
+            if (data.err != "") {
+                if(data.err=="无效的操作"){
+                    alert(data.err);
+                    //window.location.href="login.html"
+                }
+            } else {
+                var orderinfo = data.data;
+                console.log(orderinfo);
+                if (orderinfo.paytype == 1) {
+                    var strPaytype = "在线支付";
+                }
+                if (orderinfo.paytype == 2) {
+                    var strPaytype = "ETH支付";
+                }
+                if (orderinfo.paytype == 3) {
+                    var strPaytype = "ATNL兑换";
+                }
+                if (orderinfo.state == 1) {
+                    var strState = "待支付";
+                }
+                if (orderinfo.state == 2) {
+                    var strState = "未发货";
+                }
+                if (orderinfo.state == 3) {
+                    var strState = "已发货";
+                }
+                if (orderinfo.state == 4) {
+                    var strState = "完成";
+                }
+                if (orderinfo.state == 0) {
+                    var strState = "取消";
+                }
+                if (orderinfo.paystate == 0) {
+                    var strPaystate = "未支付";
+                }
+                if (orderinfo.paystate == 1) {
+                    var strPaystate = "已支付";
+                }
+
+                $("#id").text(orderinfo.id)
+                $("#uid").text(orderinfo.uid)
+                $("#pid").text(orderinfo.pid)
+                $("#count").text(orderinfo.count)
+                $("#name").text(orderinfo.name)
+                $("#contacts").text(orderinfo.contacts)
+                $("#addr").text(orderinfo.addr)
+                $("#msg").text(orderinfo.msg)
+                $("#price").text(orderinfo.price)
+                $("#eth").text(orderinfo.eth)
+                $("#atnlpay").text(orderinfo.atnlpay)
+                $("#realprice").text(orderinfo.realprice)
+                $("#orderPayment").text(orderinfo.payment)
+                $("#qid").text(orderinfo.qid)
+                $("#create_time").text(orderinfo.create_time)
+                $("#pay_time").text(orderinfo.pay_time)
+                $("#send_time").text(orderinfo.send_time)
+                $("#orderTrackno").text(orderinfo.trackno)
+                $("#extra").text(orderinfo.extra)
+                $("#state").text(strState)
+                $("#paytype").text(strPaytype)
+                $("#paystate").text(strPaystate)
+
+                html = '<button type="button" class="btn btn-warning btn-sm" onclick="payed(' + orderinfo.id + ')">对账</button>&nbsp;&nbsp;' +
+                        '<button type="button" class="btn btn-warning btn-sm" onclick="send(' + orderinfo.id + ')">发货</button>&nbsp;&nbsp;' +
+                        '<button type="button" class="btn btn-warning btn-sm" onclick="finish(' + orderinfo.id + ')">订单完成</button>&nbsp;&nbsp;' +
+                        '<button type="button" class="btn btn-warning btn-sm" onclick="closeOrder(' + orderinfo.id + ')">关闭</button>';
+
+                $("#btn").html(html)
+
+            }
+        });
+
+        //提交对账
+        $("#btnPayedSub").click(function () {
+            var oid = $("#payedOid").val();
+            var payment = $("#payment").val();
+            post_admin('order/payed', {
+                oid: oid,
+                payment: payment
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    location.reload();
+                }
+            });
+        });
+
+        //提交发货
+        $("#btnSendSub").click(function () {
+            var oid = $("#sendOid").val();
+            var trackno = $("#trackno").val();
+            post_admin('order/send', {
+                oid: oid,
+                trackno: trackno
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    location.reload();
+                }
+            });
+        });
+
+        //提交完成订单
+        $("#btnFinishSub").click(function () {
+            var oid = $("#finishOid").text();
+            post_admin('order/finish', {
+                oid: oid,
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    location.reload();
+                }
+            });
+        });
+
+        //提交关闭订单
+        $("#btnCloseSub").click(function () {
+            var oid = $("#closeOid").text();
+            post_admin('order/close', {
+                oid: oid,
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    location.reload();
+                }
+            });
+        });
+    });
+
+    //弹出对账模态框
+    function payed(oid) {
+        $(function () {
+            $("#payedOid").val(oid);
+            $('#payedModal').modal('show');
+        })
+    }
+
+    //弹出发货模态框
+    function send(oid) {
+        $(function () {
+            $("#sendOid").val(oid);
+            $('#sendModal').modal('show');
+        })
+    }
+
+    //弹出订单完成模态框
+    function finish(oid) {
+        $(function () {
+            $("#finishOid").text(oid);
+            $('#finishModal').modal('show');
+        })
+    }
+
+    //弹出订单关闭模态框
+    function closeOrder(oid) {
+        $(function () {
+            $("#closeOid").text(oid);
+            $('#closeModal').modal('show');
+        })
+    }
+</script>
+</body>
+
+</html>

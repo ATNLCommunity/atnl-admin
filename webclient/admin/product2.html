@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>商品管理</title>
+    <link href="../resource/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resource/css/metisMenu.min.css" rel="stylesheet">
+    <link href="../resource/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../resource/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">阿图纳拉</a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user" style="left: 0">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="device.html"><i class="fa fa-paper-plane fa-fw"></i>设备管理</a>
+                    </li>
+                    <li>
+                        <a href="order.html"><i class="fa fa-list fa-fw"></i>订单管理</a>
+                    </li>
+                    <li>
+                        <a href="user.html"><i class="fa fa-user-md fa-fw"></i>用户管理</a>
+                    </li>
+                    <li>
+                        <a href="product.html"><i class="fa fa-calendar fa-fw"></i>商品管理</a>
+                    </li>
+                    <li>
+                        <a href="quan.html"><i class="fa fa-level-down fa-fw"></i>优惠券管理</a>
+                    </li>
+                    <li>
+                        <a href="sheep.html"><i class="fa fa-hand-spock-o fa-fw"></i>羊羔管理</a>
+                    </li>
+                    <li>
+                        <a href="log.html"><i class="fa fa-calendar-minus-o fa-fw"></i>日志管理</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">商品管理</h3>
+            </div>
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-2 col-xs-12 form-group"><input type="text" class="form-control" id="name"
+                                                                          placeholder="商品名"></div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <select class="form-control" id="type">
+                                <option value="" selected="selected">选择类型</option>
+                                <option value="0">可购买</option>
+                                <option value="1">仅兑换</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <button type="button" class="btn btn-primary" id="btnSearch"><i class="fa fa-search"></i>搜索
+                            </button>
+                            <button type="button" class="btn btn-success" id="btnClear"><i class="fa fa-refresh"></i>清空
+                            </button>
+                        </div>
+                        <div class="col-lg-1 col-lg-offset-4 col-xs-3 col-xs-offset-3 form-group">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addProModal"><i
+                                    class="fa fa-plus"></i>添加
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>商品ID</th>
+                            <th>发货时间</th>
+                            <th>RMB价格</th>
+                            <th>ETH价格</th>
+                            <th>剩余数量</th>
+                            <th>商品名</th>
+                            <th>类型</th>
+                            <th>兑换所需Atnl</th>
+                            <th>截止时间</th>
+                            <th width="9%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="page-nav pull-right">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li id="pageP">
+                                <a aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;上一页</span>
+                                </a>
+                            </li>
+                            <!--<li><a href="#">1</a></li>-->
+                            <li id="pageN">
+                                <a aria-label="Next">
+                                    <span aria-hidden="true">下一页&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--添加商品模态框 -->
+                <div class="modal fade" id="addProModal" tabindex="-1" role="dialog" aria-labelledby="addProModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="addProModalLabel">添加商品</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="addProName" class="control-label">商品名:</label>
+                                    <input type="text" class="form-control" id="addProName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="csvform" class="control-label">上传图片:</label>
+
+                                    <form id="csvform" enctype="multipart/form-data">
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" id="uploadImg">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" id="csvfile"
+                                                    onclick="uploadfile()">
+                                                提交
+                                            </button>
+                                        </span>
+                                        </div><!-- /input-group -->
+                                    </form>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addProPrice" class="control-label">RMB价格:</label>
+                                    <input type="text" class="form-control" id="addProPrice">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addProEth" class="control-label">ETH价格:</label>
+                                    <input type="text" class="form-control" id="addProEth">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addProType" class="control-label">购买类型:</label>
+                                    <select class="form-control" id="addProType">
+                                        <option value="" selected="selected">选择类型</option>
+                                        <option value="0">可购买</option>
+                                        <option value="1">仅兑换</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addProAtnl" class="control-label">ATNL价格:</label>
+                                    <input type="text" class="form-control" id="addProAtnl">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addProCount" class="control-label">剩余数量:</label>
+                                    <input type="text" class="form-control" id="addProCount">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addProSendDate" class="control-label">发货时间:</label>
+                                    <input type="text" class="form-control" id="addProSendDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addProExpireTime" class="control-label">截至时间:</label>
+                                    <input type="text" class="form-control" id="addProExpireTime">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="btnAddSub">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--修改商品模态框 -->
+                <div class="modal fade" id="editProModal" tabindex="-1" role="dialog"
+                     aria-labelledby="editProModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="editProModalLabel">修改商品</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="proId" class="control-label">商品ID:</label>
+                                    <input type="text" class="form-control" readonly id="proId">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProName" class="control-label">商品名:</label>
+                                    <input type="text" class="form-control" id="editProName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProPrice" class="control-label">RMB价格:</label>
+                                    <input type="text" class="form-control" id="editProPrice">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProEth" class="control-label">ETH价格:</label>
+                                    <input type="text" class="form-control" id="editProEth">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProType" class="control-label">购买类型:</label>
+                                    <select class="form-control" id="editProType">
+                                        <option value="" selected="selected">选择类型</option>
+                                        <option value="0">可购买</option>
+                                        <option value="1">仅兑换</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProAtnl" class="control-label">ATNL价格:</label>
+                                    <input type="text" class="form-control" id="editProAtnl">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProCount" class="control-label">剩余数量:</label>
+                                    <input type="text" class="form-control" id="editProCount">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProSendDate" class="control-label">发货时间:</label>
+                                    <input type="text" class="form-control" id="editProSendDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editProExpireTime" class="control-label">截至时间:</label>
+                                    <input type="text" class="form-control" id="editProExpireTime">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="btnEditProSub">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--删除商品模态框-->
+                <div class="modal fade" id="delProModal" tabindex="-1" role="dialog" aria-labelledby="delProModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="delProModalLabel">删除设备</h4>
+                            </div>
+                            <div class="modal-body">
+                                确定删除<span id="delProId"></span>吗？
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="btnDelProSub">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="../resource/js/jquery.min.js"></script>
+<script src="../resource/js/bootstrap.min.js"></script>
+<script src="../resource/js/metisMenu.min.js"></script>
+<script src="../resource/js/sb-admin-2.min.js"></script>
+<script src="../resource/js/utils.js"></script>
+<script src="../resource/js/md5.min.js"></script>
+<script src="../resource/js/jquery.ajax.fileUpload.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var page = getParam('page');
+        var name = getParam('name');
+        var type = getParam('type');
+
+        post_admin('product/list', {page: page, name: name}, function (data) {
+            if (data.err != "") {
+                alert(data.err);
+            } else {
+                var productlist = data.data.arr;
+                var html = '';
+                var htmllist = '';
+                for (var i = 0; i < productlist.length; i++) {
+                    if (productlist[i].type == 0) {
+                        var typeHtml = "可购买"
+                    }
+                    if (productlist[i].type == 1) {
+                        typeHtml = "仅兑换"
+                    }
+                    html = '<tr><th scope="row">' + productlist[i].id + '</th> <td>' + productlist[i].send_date + '</td> <td>' + productlist[i].price + '</td> <td>' + productlist[i].eth + '</td> ' +
+                            '<td>' + productlist[i].count + '</td><td>' + productlist[i].name + '</td><td>' + typeHtml + '</td><td>' + productlist[i].atnl + '</td> <td>' + productlist[i].expire_time + '</td>' +
+                            '<td><button type="button" class="btn btn-warning btn-sm" onclick="editPro(' + productlist[i].id + ')">修改</button>' +
+                            '<button type="button" class="btn btn-warning btn-sm" onclick="delPro(' + productlist[i].id + ')">删除</button></td></tr>';
+                    htmllist += html;
+                }
+                $("#tBody").html(htmllist);
+                if (page == 0) {
+                    $("#pageP").attr("class", "disabled");
+                } else {
+                    $("#pageP a").attr("href", "./product.html?page=" + (page - 0 - 1) + "&name=" + name + "type" + type);
+                }
+                $("#pageN a").attr("href", "./product.html?page=" + (page - 0 + 1) + "&name=" + name + "type" + type);
+            }
+        });
+        $("#name").val(name);
+
+        //搜索
+        $("#btnSearch").click(function () {
+            var name = $("#name").val();
+            var type = $("#type option:selected").val();
+            window.location.href = "./product.html?page=" + page + "&name=" + name + "type" + type;
+        });
+
+        //清空
+        $("#btnClear").click(function () {
+            $("#name").val("");
+        });
+
+        //添加商品
+        $("#btnAddSub").click(function () {
+            var send_date = $("#addProSendDate").val();
+            var price = $("#addProPrice").val();
+            var eth = $("#addProEth").val();
+            var count = $("#addProCount").val();
+            var expire_time = $("#addProExpireTime").val();
+            var name = $("#addProName").val();
+            var type = $("#addProType").val();
+            var atnl = $("#addProAtnl").val();
+            post_admin('product/add', {
+                name: name,
+                senddate: send_date,
+                price: price,
+                eth: eth,
+                type: type,
+                atnl: atnl,
+                count: count,
+                expiretime: expire_time
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    window.location.href = "./product.html";
+                }
+            });
+        })
+
+        //提交商品修改
+        $("#btnEditProSub").click(function () {
+            var send_date = $("#editProSendDate").val();
+            var price = $("#editProPrice").val();
+            var eth = $("#editProEth").val();
+            var count = $("#editProCount").val();
+            var expire_time = $("#editProExpireTime").val();
+            var name = $("#editProName").val();
+            var id = $("#proId").val();
+            var type = $("#editProType").val();
+            var atnl = $("#editProAtnl").val();
+            post_admin('product/edit', {
+                id: id,
+                name: name,
+                senddate: send_date,
+                price: price,
+                eth: eth,
+                type: type,
+                atnl: atnl,
+                count: count,
+                expiretime: expire_time
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    window.location.href = "./product.html";
+                }
+            });
+        })
+
+        //提交删除
+        $("#btnDelProSub").click(function () {
+            var id = $("#delProId").val();
+            post_admin('product/delete', {
+                id: id,
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    window.location.href = "./product.html";
+                }
+            });
+        })
+    })
+
+    //弹出商品修改模态框
+    function editPro(pid) {
+        $(function () {
+            $("#proId").val(pid);
+            post_admin('product/get', {
+                pid: pid
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    var product = data.data;
+                    console.log(product);
+                    $("#editProSendDate").val(product.send_date);
+                    $("#editProPrice").val(product.price);
+                    $("#editProEth").val(product.eth);
+                    $("#editProCount").val(product.count);
+                    $("#editProExpireTime").val(product.expire_time);
+                    $("#editProName").val(product.name);
+                    $("#editProAtnl").val(product.atnl);
+                    $("#editProType").val(product.type);
+                }
+            });
+            $('#editProModal').modal('show');
+        })
+    }
+
+    //弹出商品删除模态框
+    function delPro(pid) {
+        $(function () {
+            $("#delProId").val(pid);
+            $('#delProModal').modal('show');
+        })
+    }
+
+    function fileUpload() {
+        $.ajax({
+            url: 'http://wx.atunala.com/admin/upload/file',
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#uploadForm')[0]),
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    function SendFileUpload (fileId, callback)
+    {
+        $.ajaxFileUpload({
+            url : 'http://wx.atunala.com/admin/upload/file',
+            type: 'POST',
+            secureuri : false,
+            fileElementId : fileId,
+            dataType: 'json',
+            data : {cmd: 'admin_upload_image'},
+            success: function (data, status)
+            {
+                if(data.err == "")
+                {
+                    //calllback·µ»ØÎÄ¼þÃû
+                    callback(data.data.file);
+                }
+                else
+                {
+                    alert(data.err);
+                }
+            },
+            error: function (data, status, e)
+            {
+                document.write(e);
+                console.log(data);
+                ErrorCode('ERROR_AJAXFILE_FAILED');
+            }
+        });
+    }
+
+    function uploadfile() {
+        var formData = new FormData($("#csvform")[0]);
+        $.ajax({
+            url: 'http://wx.atunala.com/admin/upload/file',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                }
+                else {
+                    alert('上传成功!');
+
+                }
+            },
+            error: function (data) {
+                alert(data.err);
+            }
+        });
+    }
+</script>
+</body>
+
+</html>

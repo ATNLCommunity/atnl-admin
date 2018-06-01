@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>用户管理</title>
+    <link href="../resource/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resource/css/metisMenu.min.css" rel="stylesheet">
+    <link href="../resource/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../resource/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">阿图纳拉</a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user" style="left: 0">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="user.html"><i class="fa fa-user-md fa-fw"></i>用户管理</a>
+                    </li>
+                    <li>
+                        <a href="product.html"><i class="fa fa-calendar fa-fw"></i>商品管理</a>
+                    </li>
+
+                    <li>
+                        <a href="order.html"><i class="fa fa-list fa-fw"></i>订单管理</a>
+                    </li>
+                    <li>
+                        <a href="quan.html"><i class="fa fa-level-down fa-fw"></i>优惠券管理</a>
+                    </li>
+                    <li>
+                        <a href="cash.html"><i class="fa fa-calendar-minus-o fa-fw"></i>提现管理</a>
+                    </li>
+                    <li>
+                        <a href="sheep.html"><i class="fa fa-hand-spock-o fa-fw"></i>羊羔管理</a>
+                    </li>
+                    <li>
+                        <a href="device.html"><i class="fa fa-paper-plane fa-fw"></i>设备管理</a>
+                    </li>
+                    <li>
+                        <a href="invite.html"><i class="fa fa-calendar-minus-o fa-fw"></i>注册设置</a>
+                    </li>
+                    <li>
+                        <a href="rank.html"><i class="fa fa-calendar-minus-o fa-fw"></i>邀请排行榜</a>
+                    </li>
+                    <li>
+                        <a href="log.html"><i class="fa fa-calendar-minus-o fa-fw"></i>日志管理</a>
+                    </li>
+                    <li>
+                        <a href="unlockatnl.html"><i class="fa fa-calendar-minus-o fa-fw"></i>解锁ATNL</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">用户管理</h3>
+            </div>
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <input type="text" class="form-control" id="uid" placeholder="管理员ID">
+                        </div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <input type="text" class="form-control" id="opt" placeholder="操作类型">
+                        </div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <input type="text" class="form-control" id="msg" placeholder="操作内容">
+                        </div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <input type="text" class="form-control" id="from" placeholder="开始时间">
+                        </div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <input type="text" class="form-control" id="to" placeholder="结束时间">
+                        </div>
+                        <div class="col-lg-2 col-xs-6 form-group">
+                            <button type="button" class="btn btn-primary" id="btnSearch"><i class="fa fa-search"></i>搜索
+                            </button>
+                            <button type="button" class="btn btn-success" id="btnClear"><i class="fa fa-refresh"></i>清空
+                            </button>
+                        </div>
+                        <!--<div class="col-lg-1 col-lg-offset-6 col-xs-3 col-xs-offset-3 form-group">-->
+                        <!--<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addProModal"><i-->
+                        <!--class="fa fa-plus"></i>添加-->
+                        <!--</button>-->
+                        <!--</div>-->
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>日志ID</th>
+                            <th>操作的管理员</th>
+                            <th>操作类型</th>
+                            <th>操作内容</th>
+                            <th>操作时间</th>
+                            <th width="9%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="page-nav pull-right">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li id="pageP">
+                                <a aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;上一页</span>
+                                </a>
+                            </li>
+                            <!--<li><a href="#">1</a></li>-->
+                            <li id="pageN">
+                                <a aria-label="Next">
+                                    <span aria-hidden="true">下一页&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="../resource/js/jquery.min.js"></script>
+<script src="../resource/js/bootstrap.min.js"></script>
+<script src="../resource/js/metisMenu.min.js"></script>
+<script src="../resource/js/sb-admin-2.min.js"></script>
+<script src="../resource/js/utils.js"></script>
+<script src="../resource/js/md5.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var page = getParam('page');
+        var uid = getParam('uid');
+        var opt = getParam('opt');
+        var msg = getParam('msg');
+        var from = getParam('from');
+        var to = getParam('to');
+
+        post_admin('log/list', {
+            page: page,
+            uid: uid,
+            opt: opt,
+            msg: msg,
+            from: from,
+            to: to
+        }, function (data) {
+            if (data.err != "") {
+                if(data.err=="无效的操作"){
+                    window.location.href="login.html"
+                }
+            } else {
+                var loglist = data.data.arr;
+                var html = '';
+                var htmllist = '';
+                for (var i = 0; i < loglist.length; i++) {
+                    html = '<tr><th scope="row">' + loglist[i].id + '</th> <td>' + loglist[i].uid + '</td> <td>' + loglist[i].opt + '</td> <td>' + loglist[i].msg + '</td> ' +
+                            '<td>' + loglist[i].time + '</td><td>暂无</td></tr>';
+                    htmllist += html;
+                }
+                $("#tBody").html(htmllist);
+                if (page == 0) {
+                    $("#pageP").attr("class", "disabled");
+                } else {
+                    $("#pageP a").attr("href", "./log.html?page=" + (page - 0 - 1) + "&uid=" + uid + "&opt=" + opt + "&msg=" + msg + "&from=" + from + "&to=" + to);
+                }
+                $("#pageN a").attr("href", "./log.html?page=" + (page - 0 + 1) + "&uid=" + uid + "&opt=" + opt + "&msg=" + msg + "&from=" + from + "&to=" + to);
+            }
+        });
+        $("#uid").val(uid);
+        $("#opt").val(opt);
+        $("#msg").val(msg);
+        $("#from").val(from);
+        $("#to").val(to);
+
+        //搜索
+        $("#btnSearch").click(function () {
+            var uid = $("#uid").val();
+            var opt = $("#opt").val();
+            var msg = $("#msg").val();
+            var from = $("#from").val();
+            var to = $("#to").val();
+            window.location.href = "./log.html?page=" + page + "&uid=" + uid + "&opt=" + opt + "&msg=" + msg + "&from=" + from + "&to=" + to;
+        });
+
+        //清空
+        $("#btnClear").click(function () {
+            $("#uid").val("");
+            $("#opt").val("");
+            $("#msg").val("");
+            $("#from").val("");
+            $("#to").val("");
+        });
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>用户管理</title>
+    <link href="../resource/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resource/css/metisMenu.min.css" rel="stylesheet">
+    <link href="../resource/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../resource/css/style.css" rel="stylesheet">
+    <link href="../resource/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">阿图纳拉</a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user" style="left: 0">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="user.html"><i class="fa fa-user-md fa-fw"></i>用户管理</a>
+                    </li>
+                    <li>
+                        <a href="product.html"><i class="fa fa-calendar fa-fw"></i>商品管理</a>
+                    </li>
+
+                    <li>
+                        <a href="order.html"><i class="fa fa-list fa-fw"></i>订单管理</a>
+                    </li>
+                    <li>
+                        <a href="quan.html"><i class="fa fa-level-down fa-fw"></i>优惠券管理</a>
+                    </li>
+                    <li>
+                        <a href="cash.html"><i class="fa fa-calendar-minus-o fa-fw"></i>提现管理</a>
+                    </li>
+                    <li>
+                        <a href="sheep.html"><i class="fa fa-hand-spock-o fa-fw"></i>羊羔管理</a>
+                    </li>
+                    <li>
+                        <a href="device.html"><i class="fa fa-paper-plane fa-fw"></i>设备管理</a>
+                    </li>
+                    <li>
+                        <a href="invite.html"><i class="fa fa-calendar-minus-o fa-fw"></i>注册设置</a>
+                    </li>
+                    <li>
+                        <a href="rank.html"><i class="fa fa-calendar-minus-o fa-fw"></i>邀请排行榜</a>
+                    </li>
+                    <li>
+                        <a href="log.html"><i class="fa fa-calendar-minus-o fa-fw"></i>日志管理</a>
+                    </li>
+                    <li>
+                        <a href="unlockatnl.html"><i class="fa fa-calendar-minus-o fa-fw"></i>解锁ATNL</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">用户管理<h5>总人数<span id="countUser"></span></h5></h3>
+            </div>
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <label for="id" class="control-label">用户ID:</label>
+                            <input type="text" class="form-control" id="id" placeholder="用户ID">
+                        </div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <label for="phone" class="control-label">手机号:</label>
+                            <input type="text" class="form-control" id="phone" placeholder="手机号">
+                        </div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <label for="name" class="control-label">用户名:</label>
+                            <input type="text" class="form-control" id="name" placeholder="用户名">
+                        </div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <label for="ip" class="control-label">登录IP:</label>
+                            <input type="text" class="form-control" id="ip" placeholder="登录IP">
+                        </div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <label for="inviteid" class="control-label">邀请者ID:</label>
+                            <input type="text" class="form-control" id="inviteid" placeholder="邀请者ID">
+                        </div>
+                        <div class="col-lg-2 col-xs-12 form-group">
+                            <label for="mail" class="control-label">邮箱:</label>
+                            <input type="text" class="form-control" id="mail" placeholder="邮箱">
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <button type="button" class="btn btn-primary" id="btnSearch"><i class="fa fa-search"></i>搜索
+                            </button>
+                            <button type="button" class="btn btn-success" id="btnClear"><i class="fa fa-refresh"></i>清空
+                            </button>
+                        </div>
+                        <!--<div class="col-lg-1 col-lg-offset-6 col-xs-3 col-xs-offset-3 form-group">-->
+                        <!--<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addProModal"><i-->
+                        <!--class="fa fa-plus"></i>添加-->
+                        <!--</button>-->
+                        <!--</div>-->
+                        <div class="page-nav pull-right">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination" id="pageTop">
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>用户ID</th>
+                            <th>邀请者ID</th>
+                            <th>手机号</th>
+                            <th>用户名</th>
+                            <th>现金券</th>
+                            <th>已解锁ATNL</th>
+                            <th>未解锁ATNL</th>
+                            <th>已申请提现ATNL</th>
+                            <th>累计提现ATNL</th>
+                            <th>最近修改时间</th>
+                            <th>注册时间</th>
+                            <th>登录IP</th>
+                            <th>邮箱地址</th>
+                            <th>Imtoken地址</th>
+                            <th width="9%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="page-nav pull-right">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="pageBottom">
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--设置异常模态框-->
+<div class="modal fade" id="setStateModal" tabindex="-1" role="dialog" aria-labelledby="setStateModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="setStateModalLabel">设置异常值</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="stateUid" class="control-label">用户id：</label>
+                    <input type="text" class="form-control" id="stateUid" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="stateNum" class="control-label">设置数值：</label>
+                    <input type="text" class="form-control" id="stateNum">
+                    <label for="stateNum" class="control-label" style="color: red">0表示正常，1-99
+                        表示异状态，但可以登录，100-250表示限制状态，不能登录</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="setStateSub">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../resource/js/jquery.min.js"></script>
+<script src="../resource/js/bootstrap.min.js"></script>
+<script src="../resource/js/metisMenu.min.js"></script>
+<script src="../resource/js/sb-admin-2.min.js"></script>
+<script src="../resource/js/utils.js"></script>
+<script src="../resource/js/md5.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var page = getParam('page');
+        var inviteid = getParam('inviteid');
+        var phone = getParam('phone');
+        var name = getParam('name');
+        var mail = getParam('mail');
+        var id = getParam('id');
+        var ip = getParam('ip');
+
+        post_admin('user/list', {
+            page: page,
+            inviteid: inviteid,
+            phone: phone,
+            name: name,
+            mail: mail,
+            id: id,
+            ip: ip
+        }, function (data) {
+            if (data.err != "") {
+                if (data.err == "无效的操作") {
+                    window.location.href = "login.html";
+                }
+            } else {
+                var userlist = data.data.arr;
+                var html = '';
+                var htmllist = '';
+                console.log(userlist);
+                console.log(data);
+                $("#countUser").text(data.data.count);
+                var countPage = parseInt(data.data.count / 20);
+                var stateClass = ""
+                for (var i = 0; i < userlist.length; i++) {
+                    if (userlist[i].state >= 1 && userlist[i].state < 100) {
+                        stateClass = "atnl-bgcolor-orange";
+                    } else if (userlist[i].state >= 100 && userlist[i].state <= 250) {
+                        stateClass = "atnl-bgcolor-red";
+                    } else {
+                        stateClass = "";
+                    }
+                    html = '<tr class="' + stateClass + '"><th scope="row">' + userlist[i].id + '</th> <td>' + userlist[i].inviteid + '</td> <td>' + userlist[i].phone + '</td> <td>' + userlist[i].name + '</td> ' +
+                            '<td>' + userlist[i].money + '</td><td>' + userlist[i].atnl + '</td><td>' + userlist[i].lockatnl + '</td><td>' + userlist[i].needatnl + '</td><td>' + userlist[i].allatnl + '</td>' +
+                            '<td>' + userlist[i].update_time + '</td><td>' + userlist[i].create_time + '</td><td>' + userlist[i].ip + '</td><td>' + userlist[i].mail + '</td><td>' + userlist[i].tokenaddr + '</td>' +
+                            '<td><botton class="btn btn-primary" onclick="setState( ' + userlist[i].id + ',' + userlist[i].state + ')">设置异常值</botton></td></tr>';
+                    htmllist += html;
+                }
+                $("#tBody").html(htmllist);
+                var htmlPage = "";
+                var htmlPageP = ""
+                var htmlPageN = ""
+                var htmlPageF = ""
+                var htmlPageE = ""
+                var htmlPageNum = ""
+                if (page == 0) {
+//                    $("#pageP").attr("class", "disabled");
+                    htmlPageP = ' <li class="disabled"><a aria-label="Previous"><span aria-hidden="true">&laquo;上一页</span> </a> </li>';
+                } else {
+                    htmlPageP = ' <li><a aria-label="Previous" href="./user.html?page=' + (page - 0 - 1) + '&mail=' + mail + '&inviteid=' + inviteid + '&phone=' + phone + '&name=' + name + '"><span aria-hidden="true">&laquo;上一页</span> </a> </li>';
+//                    $("#pageP a").attr("href", "./user.html?page=" + (page - 0 - 1) + "&mail=" + mail+ "&inviteid=" + inviteid+ "&phone=" + phone+ "&name=" + name);
+                }
+                htmlPageN = ' <li><a aria-label="Next" href="./user.html?page=' + (page - 0 + 1) + '&mail=' + mail + '&inviteid=' + inviteid + '&phone=' + phone + '&name=' + name + '&ip=' + ip + '&id=' + id + '"><span aria-hidden="true">下一页&raquo;</span> </a> </li>';
+                htmlPageF = ' <li><a href="./user.html?page=0&mail=' + mail + '&inviteid=' + inviteid + '&phone=' + phone + '&name=' + name + '"><span aria-hidden="true">首页</span> </a> </li>';
+                htmlPageE = ' <li><a href="./user.html?page=' + countPage + '&mail=' + mail + '&inviteid=' + inviteid + '&phone=' + phone + '&name=' + name + '&ip=' + ip + '&id=' + id + '"><span aria-hidden="true">尾页</span> </a> </li>';
+
+
+                //分页
+                if (countPage < 10) {
+                    // 1 -10
+                    var htmlPageNumC = "";
+                    for (var i = 0; i <= countPage; ++i) {
+                        if (i == page) {
+                            htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i + 1) + '</span>';
+                        } else {
+                            htmlPageNumC = '<li><a aria-label="Next" href="./user.html?page=' + i + '&mail=' + mail + '&inviteid=' + inviteid + '&phone=' + phone + '&name=' + name + '&ip=' + ip + '&id=' + id + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                        }
+                        htmlPageNum += htmlPageNumC;
+                    }
+                } else if (page >= countPage - 9) {
+                    if (page <= countPage - 5) {
+                        var pageStart = page - 4;
+                        var pageEnd = pageStart + 9;
+                        for (var i = pageStart; i <= pageEnd; ++i) {
+                            if (i == page) {
+                                htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            } else {
+                                htmlPageNumC = '<li><a aria-label="Next" href="./user.html?page=' + i + '&mail=' + mail + '&inviteid=' + inviteid + '&phone=' + phone + '&name=' + name + '&ip=' + ip + '&id=' + id + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            }
+                            htmlPageNum += htmlPageNumC;
+                        }
+                    } else {
+                        var pageStart = countPage - 9;
+                        var pageEnd = countPage;
+                        for (var i = pageStart; i <= pageEnd; ++i) {
+                            if (i == page) {
+                                htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            } else {
+                                htmlPageNumC = '<li><a aria-label="Next" href="./user.html?page=' + i + '&mail=' + mail + '&inviteid=' + inviteid + '&phone=' + phone + '&name=' + name + '&ip=' + ip + '&id=' + id + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            }
+                            htmlPageNum += htmlPageNumC;
+                        }
+                    }
+
+                } else {
+                    if (page <= 4) {
+                        var pageStart = 0;
+
+                        var pageEnd = pageStart - 0 + 9;
+                        console.log("起始页" + pageStart + "结束页" + pageEnd);
+                        for (var i = pageStart; i <= pageEnd; ++i) {
+                            if (i == page) {
+                                htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i - 0 + 1) + '</span>';
+                            } else {
+                                htmlPageNumC = '<li><a aria-label="Next" href="./user.html?page=' + i + '&mail=' + mail + '&inviteid=' + inviteid + '&phone=' + phone + '&name=' + name + '&ip=' + ip + '&id=' + id + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            }
+                            htmlPageNum += htmlPageNumC;
+                        }
+                    } else {
+                        var pageStart = page - 4;
+                        var pageEnd = pageStart + 9;
+                        for (var i = pageStart; i <= pageEnd; ++i) {
+                            if (i == page) {
+                                htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            } else {
+                                htmlPageNumC = '<li><a aria-label="Next" href="./user.html?page=' + i + '&mail=' + mail + '&inviteid=' + inviteid + '&phone=' + phone + '&name=' + name + '&ip=' + ip + '&id=' + id + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            }
+                            htmlPageNum += htmlPageNumC;
+                        }
+                    }
+                }
+                $("#pageTop").html(htmlPageP + htmlPageF + htmlPageNum + htmlPageE + htmlPageN);
+                $("#pageBottom").html(htmlPageP + htmlPageF + htmlPageNum + htmlPageE + htmlPageN);
+
+
+//                $("#pageN a").attr("href", "./user.html?page=" + (page - 0 + 1) + "&mail=" + mail+ "&inviteid=" + inviteid+ "&phone=" + phone+ "&name=" + name);
+//                $("#pageF a").attr("href", "./user.html?page=0&mail=" + mail+ "&inviteid=" + inviteid+ "&phone=" + phone+ "&name=" + name);
+//                $("#pageE a").attr("href", "./user.html?page=" + countPage + "&mail=" + mail+ "&inviteid=" + inviteid+ "&phone=" + phone+ "&name=" + name);
+            }
+        });
+        $("#inviteid").val(inviteid);
+        $("#phone").val(phone);
+        $("#name").val(name);
+        $("#mail").val(mail);
+        $("#id").val(id);
+        $("#ip").val(ip);
+
+        //搜索
+        $("#btnSearch").click(function () {
+            var inviteid = $("#inviteid").val();
+            var phone = $("#phone").val();
+            var name = $("#name").val();
+            var mail = $("#mail").val();
+            var id = $("#id").val();
+            var ip = $("#ip").val();
+            window.location.href = "./user.html?mail=" + mail + "&inviteid=" + inviteid + "&phone=" + phone + "&name=" + name + "&ip=" + ip + "&id=" + id;
+        });
+
+        //清空
+        $("#btnClear").click(function () {
+            $("#inviteid").val("");
+            $("#phone").val("");
+            $("#name").val("");
+            $("#mail").val("");
+            $("#id").val("");
+            $("#ip").val("");
+        });
+
+        //提交设置异常值操作
+        $("#setStateSub").click(function () {
+            var uid = $("#stateUid").val();
+            var state = $("#stateNum").val();
+            post("user/state", {
+                uid: uid,
+                state: state
+            }, function (data) {
+                console.log(data);
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    alert("设置成功！");
+                    location.reload();
+                }
+            })
+
+        })
+
+    });
+
+    function setState(uid, state) {
+        $("#stateUid").val(uid);
+        $("#stateNum").val(state);
+        $("#setStateModal").modal("show");
+    }
+</script>
+</body>
+
+</html>

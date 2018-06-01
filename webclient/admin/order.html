@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>订单管理</title>
+    <link href="../resource/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resource/css/metisMenu.min.css" rel="stylesheet">
+    <link href="../resource/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../resource/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">阿图纳拉</a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user" style="left: 0">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="user.html"><i class="fa fa-user-md fa-fw"></i>用户管理</a>
+                    </li>
+                    <li>
+                        <a href="product.html"><i class="fa fa-calendar fa-fw"></i>商品管理</a>
+                    </li>
+
+                    <li>
+                        <a href="order.html"><i class="fa fa-list fa-fw"></i>订单管理</a>
+                    </li>
+                    <li>
+                        <a href="quan.html"><i class="fa fa-level-down fa-fw"></i>优惠券管理</a>
+                    </li>
+                    <li>
+                        <a href="cash.html"><i class="fa fa-calendar-minus-o fa-fw"></i>提现管理</a>
+                    </li>
+                    <li>
+                        <a href="sheep.html"><i class="fa fa-hand-spock-o fa-fw"></i>羊羔管理</a>
+                    </li>
+                    <li>
+                        <a href="device.html"><i class="fa fa-paper-plane fa-fw"></i>设备管理</a>
+                    </li>
+                    <li>
+                        <a href="invite.html"><i class="fa fa-calendar-minus-o fa-fw"></i>注册设置</a>
+                    </li>
+                    <li>
+                        <a href="rank.html"><i class="fa fa-calendar-minus-o fa-fw"></i>邀请排行榜</a>
+                    </li>
+                    <li>
+                        <a href="log.html"><i class="fa fa-calendar-minus-o fa-fw"></i>日志管理</a>
+                    </li>
+                    <li>
+                        <a href="unlockatnl.html"><i class="fa fa-calendar-minus-o fa-fw"></i>解锁ATNL</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">订单管理</h3>
+            </div>
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <label for="uid" class="control-label">用户ID:</label>
+                            <input type="text" class="form-control" id="uid">
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <label for="addr" class="control-label">送货地址:</label>
+                            <input type="text" class="form-control" id="addr">
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <label for="name" class="control-label">姓名:</label>
+                            <input type="text" class="form-control" id="name">
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <label for="pid" class="control-label">商品id:</label>
+                            <input type="text" class="form-control" id="pid">
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <label for="contacts" class="control-label">联系电话:</label>
+                            <input type="text" class="form-control" id="contacts">
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <label for="paytype" class="control-label">支付类型:</label>
+                            <select class="form-control" id="paytype">
+                                <option value="" selected="selected">全部</option>
+                                <option value="1">在线支付</option>
+                                <option value="2">ETH支付</option>
+                                <option value="3">ATNL兑换</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <label for="state" class="control-label">订单状态:</label>
+                            <select class="form-control" id="state">
+                                <option value="" selected="selected">全部</option>
+                                <option value="1">待支付</option>
+                                <option value="2">未发货</option>
+                                <option value="3">已发货</option>
+                                <option value="4">完成</option>
+                                <option value="0">取消</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group">
+                            <label for="paystate" class="control-label">支付状态:</label>
+                            <select class="form-control" id="paystate">
+                                <option value="" selected="selected">全部</option>
+                                <option value="0">未支付</option>
+                                <option value="1">已支付</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-xs-6 form-group" style="margin-top: 25px">
+                            <button type="button" class="btn btn-primary" id="btnSearch"><i class="fa fa-search"></i>搜索
+                            </button>
+                            <button type="button" class="btn btn-success" id="btnClear"><i class="fa fa-refresh"></i>清空
+                            </button>
+                        </div>
+                        <div class="page-nav pull-right">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination" id="pageTop">
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>订单ID</th>
+                            <th>用户ID</th>
+                            <th>商品ID</th>
+                            <th>购买数量</th>
+                            <th>姓名</th>
+                            <th>联系电话</th>
+                            <th>送货地址</th>
+                            <th>留言</th>
+                            <th>订单状态</th>
+                            <th>支付状态</th>
+                            <th>支付类型</th>
+                            <th>创建时间</th>
+                            <th width="16%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="page-nav pull-right">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="pageBottom">
+                        </ul>
+                    </nav>
+                </div>
+                <!--手动对账模态框 -->
+                <div class="modal fade" id="payedModal" tabindex="-1" role="dialog" aria-labelledby="payedModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="payedModalLabel">手动对账</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="payedOid" class="control-label">订单ID:</label>
+                                    <input type="text" class="form-control" readonly id="payedOid">
+                                </div>
+                                <div class="form-group">
+                                    <label for="payment" class="control-label">支付金额:</label>
+                                    <input type="text" class="form-control" id="payment">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="btnPayedSub">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--发货模态框 -->
+                <div class="modal fade" id="sendModal" tabindex="-1" role="dialog"
+                     aria-labelledby="sendModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="sendModalLabel">发货</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="sendOid" class="control-label">订单ID:</label>
+                                    <input type="text" class="form-control" readonly id="sendOid">
+                                </div>
+                                <div class="form-group">
+                                    <label for="trackno" class="control-label">快递单号:</label>
+                                    <input type="text" class="form-control" id="trackno">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="btnSendSub">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--订单完成模态框-->
+                <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="finishModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="finishModalLabel">订单完成</h4>
+                            </div>
+                            <div class="modal-body">
+                                确定完成订单<span id="finishOid"></span>吗？
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="btnFinishSub">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--订单关闭模态框-->
+                <div class="modal fade" id="closeModal" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="closeModalLabel">订单完成</h4>
+                            </div>
+                            <div class="modal-body">
+                                确定关闭订单<span id="closeOid"></span>吗？
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="btnCloseSub">确定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../resource/js/jquery.min.js"></script>
+<script src="../resource/js/bootstrap.min.js"></script>
+<script src="../resource/js/metisMenu.min.js"></script>
+<script src="../resource/js/sb-admin-2.min.js"></script>
+<script src="../resource/js/utils.js"></script>
+<script src="../resource/js/md5.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var uid = getParam('uid');
+        var paytype = getParam('paytype');
+        var name = getParam('name');
+        var pid = getParam('pid');
+        var state = getParam('state');
+        var paystate = getParam('paystate');
+        var page = getParam('page');
+        var addr = getParam('addr');
+        var contacts = getParam('contacts');
+
+        post_admin('order/list', {
+            uid: uid,
+            paytype: paytype,
+            name: name,
+            pid: pid,
+            state: state,
+            paystate: paystate,
+            page: page,
+            contacts: contacts
+        }, function (data) {
+            if (data.err != "") {
+                if(data.err=="无效的操作"){
+                    window.location.href="login.html"
+                }
+            } else {
+                var orderlist = data.data.arr;
+                var html = '';
+                var htmllist = '';
+                console.log(orderlist);
+                var countPage = parseInt(data.data.count / 20);
+                for (var i = 0; i < orderlist.length; i++) {
+                    if (orderlist[i].paytype == 1) {
+                        var strPaytype = "在线支付";
+                    }
+                    if (orderlist[i].paytype == 2) {
+                        var strPaytype = "ETH支付";
+                    }
+                    if (orderlist[i].paytype == 3) {
+                        var strPaytype = "ATNL兑换";
+                    }
+                    if (orderlist[i].state == 1) {
+                        var strState = "待支付";
+                    }
+                    if (orderlist[i].state == 2) {
+                        var strState = "未发货";
+                    }
+                    if (orderlist[i].state == 3) {
+                        var strState = "已发货";
+                    }
+                    if (orderlist[i].state == 4) {
+                        var strState = "完成";
+                    }
+                    if (orderlist[i].state == 0) {
+                        var strState = "取消";
+                    }
+                    if (orderlist[i].paystate == 0) {
+                        var strPaystate = "未支付";
+                    }
+                    if (orderlist[i].paystate == 1) {
+                        var strPaystate = "已支付";
+                    }
+                    html = '<tr><th scope="row"><a href="orderinfo.html?oid='+orderlist[i].id+'" target="_blank">' + orderlist[i].id + '</a></th> <td>' + orderlist[i].uid + '</td><td>' + orderlist[i].pid + '</td> ' +
+                            '<td>' + orderlist[i].count + '</td><td>' +  orderlist[i].name + '</td><td>' + orderlist[i].contacts + '</td><td>' + orderlist[i].addr + '</td> <td>' + orderlist[i].msg + '</td><td>' + strState + '</td>' +
+                            '<td>' + strPaystate + '</td><td>' + strPaytype + '</td><td>' + orderlist[i].create_time + '</td>' +
+                            '<td><button type="button" class="btn btn-warning btn-sm" onclick="payed(' + orderlist[i].id + ')">对账</button>&nbsp;&nbsp;' +
+                            '<button type="button" class="btn btn-warning btn-sm" onclick="send(' + orderlist[i].id + ')">发货</button>&nbsp;&nbsp;' +
+                            '<button type="button" class="btn btn-warning btn-sm" onclick="finish(' + orderlist[i].id + ')">订单完成</button>&nbsp;&nbsp;' +
+                            '<button type="button" class="btn btn-warning btn-sm" onclick="closeOrder(' + orderlist[i].id + ')">关闭</button></td></tr>';
+                    htmllist += html;
+                }
+                $("#tBody").html(htmllist);
+                var htmlPage = "";
+                var htmlPageP = ""
+                var htmlPageN = ""
+                var htmlPageF = ""
+                var htmlPageE = ""
+                var htmlPageNum = ""
+                if (page == 0) {
+                    htmlPageP = ' <li class="disabled"><a aria-label="Previous"><span aria-hidden="true">&laquo;上一页</span> </a> </li>';
+                } else {
+//                    $("#pageP a").attr("href", "./order.html?uid=" + uid + "&addr=" + addr + "&name=" + name + "&pid=" + pid + "&paytype=" + paytype + "&state=" + state + "&paystate=" + paystate + "&page=" + (page - 0 - 1));
+                    htmlPageP = ' <li><a aria-label="Previous" href="./order.html?page=' + (page - 0 - 1) + '&uid=' + uid + '&addr=' + addr + '&name=' + name + '' +
+                            '&pid=' + pid + '&pid=' + pid + '&paytype=' + paytype + '&state=' + state + '&paystate=' + paystate + '"><span aria-hidden="true">&laquo;上一页</span> </a> </li>';
+                }
+//                $("#pageN a").attr("href", "./order.html?&uid=" + uid + "&addr=" + addr + "&name=" + name + "&pid=" + pid + "&paytype=" + paytype + "&state=" + state + "&paystate=" + paystate + "&page=" + (page - 0 + 1));
+                htmlPageN = ' <li><a aria-label="Next" href="./order.html?page=' + (page - 0 + 1) + '&uid=' + uid + '&addr=' + addr + '&name=' + name + '' +
+                        '&pid=' + pid + '&pid=' + pid + '&paytype=' + paytype + '&state=' + state + '&paystate=' + paystate + '"><span aria-hidden="true">下一页&raquo;</span> </a> </li>';
+                htmlPageF = ' <li><a href="./order.html?page=0&uid=' + uid + '&addr=' + addr + '&name=' + name + '' +
+                '&pid=' + pid + '&pid=' + pid + '&paytype=' + paytype + '&state=' + state + '&paystate=' + paystate + '"><span aria-hidden="true">首页</span> </a> </li>';
+                htmlPageE = ' <li><a href="./order.html?page=' + countPage  + '&uid=' + uid + '&addr=' + addr + '&name=' + name + '' +
+                        '&pid=' + pid + '&pid=' + pid + '&paytype=' + paytype + '&state=' + state + '&paystate=' + paystate + '"><span aria-hidden="true">尾页</span> </a> </li>';
+                //分页
+                if (countPage < 10) {
+                    // 1 -10
+                    var htmlPageNumC = "";
+                    for (var i = 0; i <= countPage; ++i) {
+                        if (i == page) {
+                            htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i + 1) + '</span>';
+                        } else {
+                            htmlPageNumC = '<li><a aria-label="Next" href="./order.html?page=' + i  + '&uid=' + uid + '&addr=' + addr + '&name=' + name + '' +
+                                    '&pid=' + pid + '&pid=' + pid + '&paytype=' + paytype + '&state=' + state + '&paystate=' + paystate + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                        }
+                        htmlPageNum += htmlPageNumC;
+                    }
+                } else if (page>= countPage-9) {
+                    //最大100
+                    //91--100
+                    if(page<=countPage-5){
+                        var pageStart = page - 4;
+                        var pageEnd = pageStart + 9;
+                        for (var i = pageStart; i <= pageEnd; ++i) {
+                            if (i == page) {
+                                htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            } else {
+                                htmlPageNumC = '<li><a aria-label="Next" href="./order.html?page=' + i  + '&uid=' + uid + '&addr=' + addr + '&name=' + name + '' +
+                                        '&pid=' + pid + '&pid=' + pid + '&paytype=' + paytype + '&state=' + state + '&paystate=' + paystate + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            }
+                            htmlPageNum += htmlPageNumC;
+                        }
+                    }else{
+                        var pageStart = countPage - 9;
+                        var pageEnd = countPage;
+                        for (var i = pageStart; i <= pageEnd; ++i) {
+                            if (i == page) {
+                                htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            } else {
+                                htmlPageNumC = '<li><a aria-label="Next" href="./order.html?page=' + i + '&uid=' + uid + '&addr=' + addr + '&name=' + name + '' +
+                                        '&pid=' + pid + '&pid=' + pid + '&paytype=' + paytype + '&state=' + state + '&paystate=' + paystate + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            }
+                            htmlPageNum += htmlPageNumC;
+                        }
+                    }
+
+                } else {
+                    if(page<=4){
+                        var pageStart = 0;
+
+                        var pageEnd = pageStart-0 + 9;
+                        console.log("起始页"+pageStart+"结束页"+pageEnd);
+                        for (var i = pageStart; i <= pageEnd; ++i) {
+                            if (i == page) {
+                                htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i-0 + 1) + '</span>';
+                            } else {
+                                htmlPageNumC = '<li><a aria-label="Next" href="./order.html?page=' + i  + '&uid=' + uid + '&addr=' + addr + '&name=' + name + '' +
+                                        '&pid=' + pid + '&pid=' + pid + '&paytype=' + paytype + '&state=' + state + '&paystate=' + paystate + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            }
+                            htmlPageNum += htmlPageNumC;
+                        }
+                    }else{
+                        var pageStart = page - 4;
+                        var pageEnd = pageStart + 9;
+                        for (var i = pageStart; i <= pageEnd; ++i) {
+                            if (i == page) {
+                                htmlPageNumC = '<li class="disabled"><a aria-label="Next" style="background-color: #00b7ee"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            } else {
+                                htmlPageNumC = '<li><a aria-label="Next" href="./order.html?page=' + i + '&uid=' + uid + '&addr=' + addr + '&name=' + name + '' +
+                                        '&pid=' + pid + '&pid=' + pid + '&paytype=' + paytype + '&state=' + state + '&paystate=' + paystate + '"><span aria-hidden="true">' + (i + 1) + '</span>';
+                            }
+                            htmlPageNum += htmlPageNumC;
+                        }
+                    }
+                }
+                $("#pageTop").html(htmlPageP + htmlPageF + htmlPageNum + htmlPageE + htmlPageN);
+                $("#pageBottom").html(htmlPageP + htmlPageF + htmlPageNum + htmlPageE + htmlPageN);
+            }
+        });
+
+        $("#uid").val(uid);
+        $("#addr").val(decodeURI(addr));
+        $("#name").val(decodeURI(name));
+        $("#pid").val(pid);
+        $("#paytype").val(paytype);
+        $("#state").val(state);
+        $("#paystate").val(paystate);
+
+        //搜索
+        $("#btnSearch").click(function () {
+            var uid = $("#uid").val();
+            var addr = $("#addr").val();
+            var name = $("#name").val();
+            var pid = $("#pid").val();
+            var contacts = $("#contacts").val();
+            var paytype = $("#paytype option:selected").val();
+            var state = $("#state option:selected").val();
+            var paystate = $("#paystate option:selected").val();
+            window.location.href = "./order.html?page=" + page + "&uid=" + uid + "&addr=" + addr + "&name=" + name + "&pid=" + pid + "&paytype=" + paytype + "&state=" + state + "&paystate=" + paystate+"&contacts="+contacts;
+        });
+
+        //清空
+        $("#btnClear").click(function () {
+            $("#uid").val("");
+            $("#addr").val("");
+            $("#name").val("");
+            $("#pid").val("");
+        });
+
+        //提交对账
+        $("#btnPayedSub").click(function () {
+            var oid = $("#payedOid").val();
+            var payment = $("#payment").val();
+            post_admin('order/payed', {
+                oid: oid,
+                payment: payment
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    location.reload();
+                }
+            });
+        });
+
+        //提交发货
+        $("#btnSendSub").click(function () {
+            var oid = $("#sendOid").val();
+            var trackno = $("#trackno").val();
+            post_admin('order/send', {
+                oid: oid,
+                trackno: trackno
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    location.reload();
+                }
+            });
+        });
+
+        //提交完成订单
+        $("#btnFinishSub").click(function () {
+            var oid = $("#finishOid").text();
+            post_admin('order/finish', {
+                oid: oid,
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    location.reload();
+                }
+            });
+        });
+
+        //提交关闭订单
+        $("#btnCloseSub").click(function () {
+            var oid = $("#closeOid").text();
+            post_admin('order/close', {
+                oid: oid,
+            }, function (data) {
+                if (data.err != "") {
+                    alert(data.err);
+                } else {
+                    location.reload();
+                }
+            });
+        });
+    });
+
+    //弹出对账模态框
+    function payed(oid) {
+        $(function () {
+            $("#payedOid").val(oid);
+            $('#payedModal').modal('show');
+        })
+    }
+
+    //弹出发货模态框
+    function send(oid) {
+        $(function () {
+            $("#sendOid").val(oid);
+            $('#sendModal').modal('show');
+        })
+    }
+
+    //弹出订单完成模态框
+    function finish(oid) {
+        $(function () {
+            $("#finishOid").text(oid);
+            $('#finishModal').modal('show');
+        })
+    }
+
+    //弹出订单关闭模态框
+    function closeOrder(oid) {
+        $(function () {
+            $("#closeOid").text(oid);
+            $('#closeModal').modal('show');
+        })
+    }
+</script>
+</body>
+
+</html>
