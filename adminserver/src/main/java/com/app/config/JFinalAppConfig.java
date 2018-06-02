@@ -12,6 +12,7 @@ import com.app.controller.QuanController;
 import com.app.controller.SheepController;
 import com.app.controller.UploadController;
 import com.app.controller.UserController;
+import com.app.controller.VoteController;
 import com.app.model.Admin;
 import com.app.model.Device;
 import com.app.model.Invite;
@@ -21,6 +22,7 @@ import com.app.model.Product;
 import com.app.model.Quan;
 import com.app.model.Sheep;
 import com.app.model.User;
+import com.app.model.Vote;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -58,6 +60,7 @@ public class JFinalAppConfig extends JFinalConfig {
         routes.add("/upload", UploadController.class);
         routes.add("/invite", InviteController.class);
         routes.add("/log", LogController.class);
+        routes.add("/vote", VoteController.class);
     }
 
     @Override
@@ -89,6 +92,7 @@ public class JFinalAppConfig extends JFinalConfig {
         arp.addMapping("sheep", Sheep.class);
         arp.addMapping("invite", Invite.class);
         arp.addMapping("log", Log.class);
+        arp.addMapping("vote", Vote.class);
     }
 
     @Override
