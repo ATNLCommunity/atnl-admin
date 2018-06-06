@@ -20,7 +20,7 @@ public class VoteController extends BaseController
             return;
         }
 
-        List<Record> arr = Db.query("SELECT idx,COUNT(1) FROM vote GROUP BY idx");
+        List<Record> arr = Db.query("SELECT voteseed.*,COUNT(1) AS count FROM vote INNER JOIN voteseed ON vote.idx=voteseed.id GROUP BY idx");
         success(arr);
     }
 
