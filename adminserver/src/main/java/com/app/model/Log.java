@@ -9,17 +9,18 @@ import org.apache.commons.lang3.StringUtils;
 
 import n.fw.utils.DateUtils;
 
+// 操作日志表
 public class Log extends Model<Log>
 {
     private static final long serialVersionUID = 3554755307155224117L;
 
     public static final Log dao = new Log();
 
-    public static final String ID = "id";
-    public static final String UID = "uid";
-    public static final String OPT = "opt";
-    public static final String MSG = "msg";
-    public static final String TIME = "time";
+    public static final String ID = "id";   // 主键
+    public static final String UID = "uid"; // 操作者ID
+    public static final String OPT = "opt"; // 操作
+    public static final String MSG = "msg"; // 操作信息
+    public static final String TIME = "time";   // 时间
 
     public Log add(Long uid, String opt, String msg)
     {

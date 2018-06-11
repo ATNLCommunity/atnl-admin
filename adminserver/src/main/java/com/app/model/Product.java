@@ -7,28 +7,29 @@ import com.jfinal.plugin.activerecord.Model;
 
 import org.apache.commons.lang3.StringUtils;
 
+// 产品表
 public class Product extends Model<Product>
 {
     private static final long serialVersionUID = 3554755307155224113L;
 
     public static final Product dao = new Product();
 
-    public static final String ID = "id";
-    public static final String TYPE = "type";
-    public static final String USEQUAN = "usequan";
-    public static final String OPRICE = "oprice";
-    public static final String PRICE = "price";
-    public static final String ETH = "eth";
-    public static final String ATNL = "atnl";
-    public static final String GIFT = "gift";
-    public static final String LP = "lp";
-    public static final String COUNT = "count";
-    public static final String SEND_DATE = "send_date";
-    public static final String NAME = "name";
-    public static final String LOGO = "logo";
-    public static final String DETAIL = "detail";
-    public static final String URL = "url";
-    public static final String EXPIRE_TIME = "expire_time";
+    public static final String ID = "id";           // 产品id
+    public static final String TYPE = "type";       // 产品类型，支付、兑换等
+    public static final String USEQUAN = "usequan"; // 是否可以使用券
+    public static final String OPRICE = "oprice";   // 原价
+    public static final String PRICE = "price";     // 现价
+    public static final String ETH = "eth";         // eth支付价格
+    public static final String ATNL = "atnl";       // atnl兑换价格
+    public static final String GIFT = "gift";       // 购买后赠送atnl
+    public static final String LP = "lp";           // 购买后赠送令牌
+    public static final String COUNT = "count";     // 剩余数量，-1表示无限
+    public static final String SEND_DATE = "send_date"; // 发货日期
+    public static final String NAME = "name";       // 产品名称
+    public static final String LOGO = "logo";       // 产品logo图片地址
+    public static final String DETAIL = "detail";   // 产品描述
+    public static final String URL = "url";         // 产品图片详情
+    public static final String EXPIRE_TIME = "expire_time"; // 过期时间
 
     public Product create(Float oprice, Float price, Float eth, Float atnl, Float gift, Float lp, Integer count, Integer type, Integer usequan, String name, String logo, String detail, String url, String sendDate, String expireTime)
     {

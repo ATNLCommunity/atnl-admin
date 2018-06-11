@@ -9,16 +9,17 @@ import org.apache.commons.lang3.StringUtils;
 
 import n.fw.utils.DateUtils;
 
+// 羊的表
 public class Sheep extends Model<Sheep>
 {
     private static final long serialVersionUID = 3554755307155224116L;
 
     public static final Sheep dao = new Sheep();
 
-    public static final String ID = "id";
-    public static final String STATE = "state";
-    public static final String SID = "sid";
-    public static final String UPDATE_TIME = "update_time";
+    public static final String ID = "id";       // 羊的id
+    public static final String STATE = "state"; // 状态
+    public static final String SID = "sid";     // 对应的设备id
+    public static final String UPDATE_TIME = "update_time"; // 更新时间
 
     public Sheep create(String sid)
     {

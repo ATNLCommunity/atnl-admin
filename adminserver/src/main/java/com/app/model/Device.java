@@ -7,20 +7,21 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
+// 物联网设备表
 public class Device extends Model<Device> 
 {
     private static final long serialVersionUID = 3554755307155224109L;
 
     public static final Device dao = new Device();
 
-    public static final String ID = "id";
-    public static final String NAME = "name";
-    public static final String BINDCODE = "bindcode";
-    public static final String BINDNAME = "bindname";
-    public static final String BINDTIME = "bindtime";
-    public static final String DETAIL = "detail";
-    public static final String POWER = "power";
-    public static final String UPDATE_TIME = "update_time";
+    public static final String ID = "id";               // 设备ID
+    public static final String NAME = "name";           // 设备名称
+    public static final String BINDCODE = "bindcode";   // 绑定物体ID,如羊的id -- 可重复绑定
+    public static final String BINDNAME = "bindname";   // 绑定物体的名称，如羊的名称
+    public static final String BINDTIME = "bindtime";   // 绑定的时间
+    public static final String DETAIL = "detail";       // 设备详情描述
+    public static final String POWER = "power";         // 电量
+    public static final String UPDATE_TIME = "update_time"; // 最后更新时间
 
     public Device create(String name) 
     {

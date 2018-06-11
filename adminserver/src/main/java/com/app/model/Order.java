@@ -7,32 +7,33 @@ import com.jfinal.plugin.activerecord.Model;
 
 import org.apache.commons.lang3.StringUtils;
 
+// 订单表
 public class Order extends Model<Order>
 {
     private static final long serialVersionUID = 3554755307155224114L;
 
     public static final Order dao = new Order();
 
-    public static final String ID = "id";
-    public static final String UID = "uid";
-    public static final String PID = "pid";
-    public static final String QID = "qid";
-    public static final String COUNT = "count";
-    public static final String PRICE = "price";
-    public static final String REALPRICE = "realprice";
-    public static final String ETH = "eth";
-    public static final String PAYMENT = "payment";
-    public static final String PAYTYPE = "paytype";
-    public static final String PAYSTATE = "paystate";//
-    public static final String STATE = "state";//
-    public static final String CREATE_TIME = "create_time";
-    public static final String PAY_TIME = "pay_time";
-    public static final String SEND_TIME = "send_time";
-    public static final String ADDR = "addr";
-    public static final String NAME = "name";
-    public static final String MSG = "msg";
-    public static final String TRACHNO = "trackno";
-    public static final String EXTRA = "extra";
+    public static final String ID = "id";       // 订单id
+    public static final String UID = "uid";     // 用户id
+    public static final String PID = "pid";     // 产品id
+    public static final String QID = "qid";     // 优惠券id
+    public static final String COUNT = "count"; // 购买数量
+    public static final String PRICE = "price"; // 购买价格
+    public static final String REALPRICE = "realprice"; // 真实价格
+    public static final String ETH = "eth";     // ETH支付数量
+    public static final String PAYMENT = "payment"; // 实际支付RMB
+    public static final String PAYTYPE = "paytype"; // 支付类型
+    public static final String PAYSTATE = "paystate";   // 支付状态
+    public static final String STATE = "state";     // 订单状态
+    public static final String CREATE_TIME = "create_time"; // 创建时间
+    public static final String PAY_TIME = "pay_time";   // 支付时间
+    public static final String SEND_TIME = "send_time"; // 发货时间
+    public static final String ADDR = "addr";       // 发货地址
+    public static final String NAME = "name";       // 收件人姓名
+    public static final String MSG = "msg";         // 留言
+    public static final String TRACHNO = "trackno"; // 联系人电话
+    public static final String EXTRA = "extra";     // 额外信息,如羊的id等
 
     public Order create(Long uid, Long pid, Long qid, Integer count, Float price, Float realprice, Float eth, int payType, String addr, String name, String msg)
     {
