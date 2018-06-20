@@ -9,17 +9,17 @@ import org.apache.commons.lang3.StringUtils;
 
 import n.fw.utils.DateUtils;
 
-// ç¾Šçš„è¡¨
+// ÑòµÄ±í
 public class Sheep extends Model<Sheep>
 {
     private static final long serialVersionUID = 3554755307155224116L;
 
     public static final Sheep dao = new Sheep();
 
-    public static final String ID = "id";       // ç¾Šçš„id
-    public static final String STATE = "state"; // çŠ¶æ€
-    public static final String SID = "sid";     // å¯¹åº”çš„è®¾å¤‡id
-    public static final String UPDATE_TIME = "update_time"; // æ›´æ–°æ—¶é—´
+    public static final String ID = "id";       // ÑòµÄid
+    public static final String STATE = "state"; // ×´Ì¬
+    public static final String SID = "sid";     // ¶ÔÓ¦µÄÉè±¸id
+    public static final String UPDATE_TIME = "update_time"; // ¸üĞÂÊ±¼ä
 
     public Sheep create(String sid)
     {
