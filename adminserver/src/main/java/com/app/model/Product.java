@@ -29,9 +29,10 @@ public class Product extends Model<Product>
     public static final String LOGO = "logo";       // 产品logo图片地址
     public static final String DETAIL = "detail";   // 产品描述
     public static final String URL = "url";         // 产品图片详情
+    public static final String YF = "yf";           // 邮费
     public static final String EXPIRE_TIME = "expire_time"; // 过期时间
 
-    public Product create(Float oprice, Float price, Float eth, Float atnl, Float gift, Float lp, Integer count, Integer type, Integer usequan, String name, String logo, String detail, String url, String sendDate, String expireTime)
+    public Product create(Float oprice, Float price, Float eth, Float atnl, Float gift, Float lp, Float yf, Integer count, Integer type, Integer usequan, String name, String logo, String detail, String url, String sendDate, String expireTime)
     {
         Product product = new Product();
         product.set(TYPE, type);
@@ -41,6 +42,7 @@ public class Product extends Model<Product>
         product.set(ATNL, atnl);
         product.set(GIFT, gift);
         product.set(LP, lp);
+        product.set(YF, yf);
         product.set(COUNT, count);
         product.set(TYPE, type);
         product.set(USEQUAN, usequan);

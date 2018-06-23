@@ -52,6 +52,7 @@ public class ProductController extends BaseController
         Float atnl = Float.parseFloat(getPara("atnl", "0"));
         Float gift = Float.parseFloat(getPara("gift", "0"));
         Float lp = Float.parseFloat(getPara("lp", "0"));
+        Float yf = Float.parseFloat(getPara("yf", "0"));
         Integer count = getParaToInt("count", -1);
         Integer type = getParaToInt("type", 0);
         Integer usequan = getParaToInt("usequan", 0);
@@ -61,7 +62,7 @@ public class ProductController extends BaseController
         String detail = getPara("detail", "");
         String url = getPara("url", "");
 
-        Product product = Product.dao.create(oprice, price, eth, atnl, gift, lp, count, type, usequan, name, logo, detail, url, sendDate, expireTime);
+        Product product = Product.dao.create(oprice, price, eth, atnl, gift, lp, yf, count, type, usequan, name, logo, detail, url, sendDate, expireTime);
         if (product != null)
         {
             Log.dao.add(getUid(), "product/create", "create product - id=" + product.getLong(Product.ID) + " type=" + type + " price=" + price + " eth=" + eth + " atnl=" + atnl + " count=" + count + " logo=" + logo + " detail=" + detail + " senddate" + sendDate + " expire_time=" + expireTime);
@@ -108,6 +109,8 @@ public class ProductController extends BaseController
         product.set(Product.GIFT, gift);
         Float lp = Float.parseFloat(getPara("lp", "0"));
         product.set(Product.LP, lp);
+        Float yf = Float.parseFloat(getPara("yf", "0"));
+        product.set(Product.YF, yf);
         Integer count = getParaToInt("count", -1);
         product.set(Product.COUNT, count);
         Integer type = getParaToInt("type", 0);
