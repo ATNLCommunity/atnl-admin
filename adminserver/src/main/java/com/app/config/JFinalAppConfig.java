@@ -14,14 +14,21 @@ import com.app.controller.UploadController;
 import com.app.controller.UserController;
 import com.app.controller.VoteController;
 import com.app.model.Admin;
+import com.app.model.AtnlAddRecord;
+import com.app.model.BasicRecord;
 import com.app.model.Device;
+import com.app.model.DistanceRecord;
+import com.app.model.EventRecord;
+import com.app.model.GpsRecord;
 import com.app.model.Invite;
 import com.app.model.Log;
 import com.app.model.Order;
 import com.app.model.Product;
 import com.app.model.Quan;
 import com.app.model.Sheep;
+import com.app.model.StepRecord;
 import com.app.model.User;
+import com.app.model.UserSheep;
 import com.app.model.Vote;
 import com.app.model.VoteSeed;
 import com.jfinal.config.Constants;
@@ -95,6 +102,13 @@ public class JFinalAppConfig extends JFinalConfig {
         arp.addMapping("log", Log.class);
         arp.addMapping("vote", Vote.class);
         arp.addMapping("voteseed", VoteSeed.class);
+        arp.addMapping("usersheep", UserSheep.class);
+        arp.addMapping("basicrecord", BasicRecord.class);
+        arp.addMapping("atnladdrecord", AtnlAddRecord.class);
+        arp.addMapping("distancerecord", DistanceRecord.class);
+        arp.addMapping("gpsrecord", GpsRecord.class);
+        arp.addMapping("steprecord", StepRecord.class);
+        arp.addMapping("eventrecord", EventRecord.class);
     }
 
     @Override
