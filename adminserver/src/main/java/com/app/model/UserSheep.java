@@ -23,8 +23,9 @@ public class UserSheep extends Model<UserSheep>
 	public static final String ISOUT = "isout";   // 是否收获0未收获1已收获
 	public static final String ADDTIME = "addtime";   // 是否收获0未收获1已收获
 	public static final String PAYTIME = "paytime";   // 是否收获0未收获1已收获
+	public static final String PAYMONEY = "paymoney";   // 支付金额
 
-	public UserSheep create(Long uid, Long sheepid, int paystatus, int isout)
+	public UserSheep create(Long uid, Long sheepid, int paystatus, int isout,Float paymoney)
     {
 		UserSheep userSheep = new UserSheep();
         userSheep.set(UID, uid);
@@ -33,14 +34,15 @@ public class UserSheep extends Model<UserSheep>
         userSheep.set(ISOUT, isout);
         String addtime = DateUtils.getDateTime();
         userSheep.set(ADDTIME, addtime);
-
+        userSheep.set(PAYTIME, addtime);
+        userSheep.set(PAYMONEY, paymoney);
         if (userSheep.save())
         {
             return userSheep;
         }
         return null;
     }
-
+	
     public List<UserSheep> getUserSheeps(Long uid)
     {
         return find("SELECT * FROM `usersheep` WHERE uid=? ", uid);

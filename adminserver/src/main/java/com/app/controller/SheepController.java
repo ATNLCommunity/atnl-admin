@@ -40,9 +40,13 @@ public class SheepController extends BaseController
             errorInvalidOper();
             return;
         }
-
         String sid = getPara("sid", "");
-        Sheep sheep = Sheep.dao.create(sid);
+        float price = Float.parseFloat(getPara("price",""));
+        float weight = Float.parseFloat(getPara("weight",""));
+        float height = Float.parseFloat(getPara("height",""));
+        String birthday = getPara("birthday", "");
+        String prekilltime = getPara("prekilltime", "");
+        Sheep sheep = Sheep.dao.create(sid,price,birthday,weight,height,prekilltime);
         if (sheep != null)
         {
             Log.dao.add(getUid(), "sheep/create", "create shepp - id=" + sheep.getLong(Sheep.ID) + " sid=" + sid);

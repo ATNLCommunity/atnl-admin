@@ -9,24 +9,35 @@ import org.apache.commons.lang3.StringUtils;
 
 import n.fw.utils.DateUtils;
 
-// ÑòµÄ±í
+// ï¿½ï¿½Ä±ï¿½
 public class Sheep extends Model<Sheep>
 {
     private static final long serialVersionUID = 3554755307155224116L;
 
     public static final Sheep dao = new Sheep();
 
-    public static final String ID = "id";       // ÑòµÄid
-    public static final String STATE = "state"; // ×´Ì¬
-    public static final String SID = "sid";     // ¶ÔÓ¦µÄÉè±¸id
-    public static final String UPDATE_TIME = "update_time"; // ¸üÐÂÊ±¼ä
+    public static final String ID = "id";
+    public static final String STATE = "state";
+    public static final String SID = "sid";
+    public static final String UPDATE_TIME = "update_time";
+    public static final String PRICE = "price";
+    public static final String BIRTHDAY = "birthday";
+    public static final String WEIGHT = "weight";
+    public static final String HEIGHT = "height";
+    public static final String PREKILLTIME = "prekilltime";
+    
 
-    public Sheep create(String sid)
+    public Sheep create(String sid,float price,String birthday,float weight,float height,String prekilltime)
     {
         Sheep sheep = new Sheep();
         sheep.set(STATE, 0);
         sheep.set(SID, sid);
         sheep.set(UPDATE_TIME, DateUtils.getDateTime());
+        sheep.set(PRICE, price);
+        sheep.set(BIRTHDAY, birthday);
+        sheep.set(WEIGHT, weight);
+        sheep.set(HEIGHT, height);
+        sheep.set(PREKILLTIME, prekilltime);
         if (sheep.save())
         {
             return sheep;
