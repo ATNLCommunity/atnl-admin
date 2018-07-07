@@ -11,8 +11,9 @@ public class BasicRecord extends Model<BasicRecord> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	  
+	private static final long serialVersionUID = -8898408446476158733L;
+
+	public static final BasicRecord dao = new BasicRecord();
 	public static final String ID = "id";
     public static final String SHEEPID = "sheepid";
     public static final String RECORDTIME = "recordtime";

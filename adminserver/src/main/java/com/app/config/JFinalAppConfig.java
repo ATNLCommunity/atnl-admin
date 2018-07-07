@@ -6,6 +6,7 @@ import com.app.controller.AdminController;
 import com.app.controller.DeviceController;
 import com.app.controller.InviteController;
 import com.app.controller.LogController;
+import com.app.controller.NoticeController;
 import com.app.controller.OrderController;
 import com.app.controller.ProductController;
 import com.app.controller.QuanController;
@@ -31,6 +32,7 @@ import com.app.model.User;
 import com.app.model.UserSheep;
 import com.app.model.Vote;
 import com.app.model.VoteSeed;
+import com.app.model.Notice;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -69,6 +71,7 @@ public class JFinalAppConfig extends JFinalConfig {
         routes.add("/invite", InviteController.class);
         routes.add("/log", LogController.class);
         routes.add("/vote", VoteController.class);
+        routes.add("/notice",NoticeController.class);
     }
 
     @Override
@@ -109,6 +112,7 @@ public class JFinalAppConfig extends JFinalConfig {
         arp.addMapping("gpsrecord", GpsRecord.class);
         arp.addMapping("steprecord", StepRecord.class);
         arp.addMapping("eventrecord", EventRecord.class);
+        arp.addMapping("notice", Notice.class);
     }
 
     @Override

@@ -9,12 +9,11 @@ import com.jfinal.plugin.activerecord.Model;
 import n.fw.utils.DateUtils;
 
 public class AtnlAddRecord extends Model<AtnlAddRecord> {
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = -6749423764933930663L;
+	public static final AtnlAddRecord dao = new AtnlAddRecord();
 	public static final String ID = "id";
     public static final String SHEEPID = "sheepid";
     public static final String RECORDTIME = "recordtime";

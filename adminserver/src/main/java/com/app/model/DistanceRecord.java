@@ -7,12 +7,11 @@ import com.jfinal.plugin.activerecord.Model;
 import n.fw.utils.DateUtils;
 
 public class DistanceRecord extends Model<DistanceRecord> {
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = -1650805553387528418L;
+	public static final DistanceRecord dao = new DistanceRecord();
 	public static final String ID = "id";
     public static final String SHEEPID = "sheepid";
     public static final String RECORDTIME = "recordtime";

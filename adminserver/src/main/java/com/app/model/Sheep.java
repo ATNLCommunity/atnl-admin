@@ -25,6 +25,7 @@ public class Sheep extends Model<Sheep>
     public static final String WEIGHT = "weight";
     public static final String HEIGHT = "height";
     public static final String PREKILLTIME = "prekilltime";
+    public static final String DID = "did";
     
 
     public Sheep create(String sid,float price,String birthday,float weight,float height,String prekilltime)

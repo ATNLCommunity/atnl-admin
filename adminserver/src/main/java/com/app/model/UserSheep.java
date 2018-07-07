@@ -14,7 +14,7 @@ public class UserSheep extends Model<UserSheep>
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8047098271381691124L;
 	public static final UserSheep dao = new UserSheep();
 	public static final String ID = "id";   // 主键
 	public static final String UID = "uid"; //用户ID

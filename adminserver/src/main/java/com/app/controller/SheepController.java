@@ -41,11 +41,31 @@ public class SheepController extends BaseController
             return;
         }
         String sid = getPara("sid", "");
+        if(sid.length() == 0)
+        {
+        	error("档案编号不能为空");
+        	return;
+        }
         float price = Float.parseFloat(getPara("price",""));
+        if(price == 0f)
+        {
+        	error("售卖价格不能为空");
+        	return;
+        }
         float weight = Float.parseFloat(getPara("weight",""));
         float height = Float.parseFloat(getPara("height",""));
+        if(weight == 0f || height == 0f)
+        {
+        	error("体重身长不能为空");
+        	return;
+        }
         String birthday = getPara("birthday", "");
         String prekilltime = getPara("prekilltime", "");
+        if(birthday.length() == 0 || prekilltime.length() == 0)
+        {
+        	error("出生日期和预收获日期不能为空");
+        	return;
+        }
         Sheep sheep = Sheep.dao.create(sid,price,birthday,weight,height,prekilltime);
         if (sheep != null)
         {
@@ -53,7 +73,109 @@ public class SheepController extends BaseController
         }
         success(sheep);
     }
-
+    
+    /**
+     * 添加羊
+     */
+    public void addSheep()
+    {
+    	if (!checkLevel(2))
+        {
+            errorInvalidOper();
+            return;
+        }
+    	
+    	
+    }
+    /**
+     * 绑定设备
+     */
+    public void bindDevice()
+    {
+    	if (!checkLevel(2))
+        {
+            errorInvalidOper();
+            return;
+        }
+    	Long sheepid = getParaToLong("sheepid", 0L);
+    	if(sheepid == 0L)
+    	{
+    		error("不存在的羊羔ID");
+    		return;
+    	}
+    	Long did = getParaToLong("did", 0L);
+    	if(did == 0L)
+    	{
+    		error("不存在的设备ID");
+    		return;
+    	}
+    	Sheep sheep = Sheep.dao.findById(sheepid);
+        if (sheep == null)
+        {
+        	error("该羊羔已经不存在了");
+            return;
+        }
+    	float weight = Float.parseFloat(getPara("weight",""));
+    	if(weight <= 0f || sheep.getFloat(Sheep.WEIGHT) > weight)
+    	{
+    		error("错误的体重信息");
+    		return;
+    	}
+        float height = Float.parseFloat(getPara("height",""));
+        if(height <= 0f ||sheep.getFloat(Sheep.HEIGHT) > height)
+    	{
+    		error("错误的身长信息");
+    		return;
+    	}
+    	sheep.set(Sheep.DID, did);
+    	sheep.update();
+    	BasicRecord.dao.create(sheepid, weight, height, weight - sheep.getFloat(Sheep.WEIGHT), height - sheep.getFloat(Sheep.HEIGHT));
+        
+    	success(sheep);
+    }
+    /**
+     * 修改羊的信息
+     */
+    public void updateSheep()
+    {
+    	if (!checkLevel(2))
+        {
+            errorInvalidOper();
+            return;
+        }
+    	String sid = getPara("sid", "");
+        float price = Float.parseFloat(getPara("price",""));
+        float weight = Float.parseFloat(getPara("weight",""));
+        float height = Float.parseFloat(getPara("height",""));
+        String birthday = getPara("birthday", "");
+        String prekilltime = getPara("prekilltime", "");
+        
+        Long sheepid = getParaToLong("sheepid", 0L);
+    	if(sheepid == 0L)
+    	{
+    		error("不存在的羊羔ID");
+    		return;
+    	}
+    	
+    	Sheep sheep = Sheep.dao.findById(sheepid);
+        if (sheep == null)
+        {
+        	error("该羊羔已经不存在了");
+            return;
+        }
+        
+        sheep.set(Sheep.SID, sid);
+        sheep.set(Sheep.BIRTHDAY, birthday);
+        sheep.set(Sheep.PRICE, price);
+        sheep.set(Sheep.WEIGHT, weight);
+        sheep.set(Sheep.HEIGHT, height);
+        sheep.set(Sheep.PREKILLTIME, prekilltime);
+        sheep.update();
+        success(sheep);
+        
+        
+    }
+    
     public void delete()
     {
         if (!checkLevel(2))
@@ -86,7 +208,6 @@ public class SheepController extends BaseController
             return;
         }
         Sheep sheep = Sheep.dao.findById(sheepid);
-        BasicRecord basicRecord = new BasicRecord();
         if (sheep == null)
         {
         	error("该羊羔已经不存在了");
@@ -104,9 +225,21 @@ public class SheepController extends BaseController
         	error("错误的身长数据");
             return;
         }
-        float diffw = Float.parseFloat(getPara("diffw"));
-        float diffh = Float.parseFloat(getPara("diffh"));
-        basicRecord.create(sheepid, weight, height, diffw, diffh);
+        float diffw = 0f;
+        float diffh = 0f;
+        BasicRecord leastRecord = BasicRecord.dao.getLeastRecord(sheepid);
+        if(null == leastRecord)
+        {
+        	diffw = weight - sheep.getFloat(Sheep.WEIGHT);
+        	diffh = height - sheep.getFloat(Sheep.HEIGHT);
+        }
+        else
+        {
+        	diffw = weight - leastRecord.getFloat(Sheep.WEIGHT);
+        	diffh = height - leastRecord.getFloat(Sheep.HEIGHT);
+        }
+        
+        BasicRecord basicRecord = BasicRecord.dao.create(sheepid, weight, height, diffw, diffh);
         success(basicRecord);
     }
     
@@ -125,7 +258,6 @@ public class SheepController extends BaseController
             return;
         }
         Sheep sheep = Sheep.dao.findById(sheepid);
-        DistanceRecord distanceRecord = new DistanceRecord();
         if (sheep == null)
         {
         	error("该羊羔已经不存在了");
@@ -137,7 +269,7 @@ public class SheepController extends BaseController
         	error("错误的距离数据");
             return;
         }
-        distanceRecord.create(sheepid, distance);
+        DistanceRecord distanceRecord = DistanceRecord.dao.create(sheepid, distance);
         success(distanceRecord);
     }
     
@@ -156,7 +288,6 @@ public class SheepController extends BaseController
             return;
         }
         Sheep sheep = Sheep.dao.findById(sheepid);
-        EventRecord eventRecord = new EventRecord();
         if (sheep == null)
         {
         	error("该羊羔已经不存在了");
@@ -168,7 +299,7 @@ public class SheepController extends BaseController
         	error("事件消息不能为空");
             return;
         }
-        eventRecord.create(sheepid, event);
+        EventRecord eventRecord = EventRecord.dao.create(sheepid, event);
         success(eventRecord);
     }
     
@@ -188,7 +319,7 @@ public class SheepController extends BaseController
             return;
         }
         Sheep sheep = Sheep.dao.findById(sheepid);
-        StepRecord stepRecord = new StepRecord();
+        
         if (sheep == null)
         {
         	error("该羊羔已经不存在了");
@@ -200,7 +331,7 @@ public class SheepController extends BaseController
         	error("错误的计步数据");
             return;
         }
-        stepRecord.create(sheepid, steps);
+        StepRecord stepRecord = StepRecord.dao.create(sheepid, steps);
         success(stepRecord);
     }
     
@@ -219,7 +350,7 @@ public class SheepController extends BaseController
             return;
         }
         Sheep sheep = Sheep.dao.findById(sheepid);
-        GpsRecord gpsRecord = new GpsRecord();
+        
         if (sheep == null)
         {
         	error("该羊羔已经不存在了");
@@ -231,7 +362,7 @@ public class SheepController extends BaseController
 
         float high = Float.parseFloat(getPara("high"));
 
-        gpsRecord.create(sheepid, lon, lat, high);
+        GpsRecord gpsRecord = GpsRecord.dao.create(sheepid, lon, lat, high);
         success(gpsRecord);
     }
 }

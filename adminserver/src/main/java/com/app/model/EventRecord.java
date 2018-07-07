@@ -7,12 +7,12 @@ import com.jfinal.plugin.activerecord.Model;
 import n.fw.utils.DateUtils;
 
 public class EventRecord extends Model<EventRecord> {
-
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	  
+	private static final long serialVersionUID = 4161717810578542232L;
+	public static final EventRecord dao = new EventRecord();
 	public static final String ID = "id";
     public static final String SHEEPID = "sheepid";
     public static final String RECORDTIME = "recordtime";

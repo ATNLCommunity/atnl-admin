@@ -7,13 +7,12 @@ import com.jfinal.plugin.activerecord.Model;
 import n.fw.utils.DateUtils;
 
 public class GpsRecord extends Model<GpsRecord> {
-
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
-
+	private static final long serialVersionUID = -4811161707695793435L;
+	public static final GpsRecord dao = new GpsRecord();
 	public static final String ID = "id";
     public static final String SHEEPID = "sheepid";
     public static final String RECORDTIME = "recordtime";

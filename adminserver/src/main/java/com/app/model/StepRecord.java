@@ -11,8 +11,8 @@ public class StepRecord extends Model<StepRecord> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 3563202803059933100L;
+	public static final StepRecord dao = new StepRecord();
 	public static final String ID = "id";
     public static final String SHEEPID = "sheepid";
     public static final String RECORDTIME = "recordtime";
