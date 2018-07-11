@@ -30,9 +30,11 @@ public class Product extends Model<Product>
     public static final String DETAIL = "detail";   // 产品描述
     public static final String URL = "url";         // 产品图片详情
     public static final String YF = "yf";           // 邮费
+    public static final String SEND_DATE_DESC = "send_date_desc";   // 发货时间描述
+    public static final String SENDBY = "sendby";   // 快递
     public static final String EXPIRE_TIME = "expire_time"; // 过期时间
 
-    public Product create(Float oprice, Float price, Float eth, Float atnl, Float gift, Float lp, Float yf, Integer count, Integer type, Integer usequan, String name, String logo, String detail, String url, String sendDate, String expireTime)
+    public Product create(Float oprice, Float price, Float eth, Float atnl, Float gift, Float lp, Float yf, Integer count, Integer type, Integer usequan, String name, String logo, String detail, String url, String sendDate, String expireTime, String send_date_desc, String sendby)
     {
         Product product = new Product();
         product.set(TYPE, type);
@@ -49,6 +51,8 @@ public class Product extends Model<Product>
         product.set(LOGO, logo);
         product.set(DETAIL, detail);
         product.set(URL, url);
+        product.set(SEND_DATE_DESC, send_date_desc);
+        product.set(SENDBY, sendby);
         if (StringUtils.isBlank(sendDate))
         {
             sendDate = "2100-12-31";

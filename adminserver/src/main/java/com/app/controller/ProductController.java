@@ -61,8 +61,10 @@ public class ProductController extends BaseController
         String logo = getPara("logo", "");
         String detail = getPara("detail", "");
         String url = getPara("url", "");
+        String send_date_desc = getPara("send_date_desc", "");
+        String sendby = getPara("sendby", "");
 
-        Product product = Product.dao.create(oprice, price, eth, atnl, gift, lp, yf, count, type, usequan, name, logo, detail, url, sendDate, expireTime);
+        Product product = Product.dao.create(oprice, price, eth, atnl, gift, lp, yf, count, type, usequan, name, logo, detail, url, sendDate, expireTime, send_date_desc, sendby);
         if (product != null)
         {
             Log.dao.add(getUid(), "product/create", "create product - id=" + product.getLong(Product.ID) + " type=" + type + " price=" + price + " eth=" + eth + " atnl=" + atnl + " count=" + count + " logo=" + logo + " detail=" + detail + " senddate" + sendDate + " expire_time=" + expireTime);
@@ -118,6 +120,9 @@ public class ProductController extends BaseController
         Integer usequan = getParaToInt("usequan", 0);
         product.set(Product.USEQUAN, usequan);
         String sendDate = getPara("senddate", "");
+        String send_date_desc = getPara("send_date_desc", "");
+        String sendby = getPara("sendby", "");
+
         if (StringUtils.isNotBlank(sendDate))
         {
             product.set(Product.SEND_DATE, sendDate);
@@ -142,6 +147,17 @@ public class ProductController extends BaseController
         {
             product.set(Product.URL, url);
         }
+
+        if (StringUtils.isNotBlank(send_date_desc))
+        {
+            product.set(Product.SEND_DATE_DESC, send_date_desc);
+        }
+
+        if (StringUtils.isNotBlank(sendby))
+        {
+            product.set(Product.SENDBY, sendby);
+        }
+
         product.update();
         Log.dao.add(getUid(), "product/edit",
         "create product - id=" + id + " oprice=" + oprice + " price=" + price + " eth=" + eth + " count=" + count + " logo=" + logo + " detail=" + detail + " senddate" + sendDate + " expire_time=" + expireTime);
