@@ -79,4 +79,9 @@ public class Sheep extends Model<Sheep>
     {
         return find("SELECT * FROM sheep WHERE state=0 LIMIT ?", count);
     }
+    
+    public Sheep getBySheepId(Long sheepid)
+    {
+    	return findFirst("select * from sheep where id = ?",sheepid);
+    }
 }

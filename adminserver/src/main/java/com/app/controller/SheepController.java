@@ -61,7 +61,7 @@ public class SheepController extends BaseController
         }
         String birthday = getPara("birthday", "");
         String prekilltime = getPara("prekilltime", "");
-        if(birthday.length() == 0 || prekilltime.length() == 0)
+        if(birthday.trim().length() == 0 || prekilltime.trim().length() == 0)
         {
         	error("出生日期和预收获日期不能为空");
         	return;
@@ -109,7 +109,7 @@ public class SheepController extends BaseController
     		error("不存在的设备ID");
     		return;
     	}
-    	Sheep sheep = Sheep.dao.findById(sheepid);
+    	Sheep sheep = Sheep.dao.getBySheepId(sheepid);
         if (sheep == null)
         {
         	error("该羊羔已经不存在了");
@@ -143,13 +143,33 @@ public class SheepController extends BaseController
             errorInvalidOper();
             return;
         }
-    	String sid = getPara("sid", "");
+        
+        String sid = getPara("sid", "");
+        if(sid.length() == 0)
+        {
+        	error("档案编号不能为空");
+        	return;
+        }
         float price = Float.parseFloat(getPara("price",""));
+        if(price == 0f)
+        {
+        	error("售卖价格不能为空");
+        	return;
+        }
         float weight = Float.parseFloat(getPara("weight",""));
         float height = Float.parseFloat(getPara("height",""));
+        if(weight == 0f || height == 0f)
+        {
+        	error("体重身长不能为空");
+        	return;
+        }
         String birthday = getPara("birthday", "");
         String prekilltime = getPara("prekilltime", "");
-        
+        if(birthday.trim().length() == 0 || prekilltime.trim().length() == 0)
+        {
+        	error("出生日期和预收获日期不能为空");
+        	return;
+        }        
         Long sheepid = getParaToLong("sheepid", 0L);
     	if(sheepid == 0L)
     	{
@@ -157,7 +177,7 @@ public class SheepController extends BaseController
     		return;
     	}
     	
-    	Sheep sheep = Sheep.dao.findById(sheepid);
+    	Sheep sheep = Sheep.dao.getBySheepId(sheepid);
         if (sheep == null)
         {
         	error("该羊羔已经不存在了");
