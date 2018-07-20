@@ -10,6 +10,7 @@ import com.app.controller.NoticeController;
 import com.app.controller.OrderController;
 import com.app.controller.ProductController;
 import com.app.controller.QuanController;
+import com.app.controller.ReportController;
 import com.app.controller.SheepController;
 import com.app.controller.UploadController;
 import com.app.controller.UserController;
@@ -72,6 +73,7 @@ public class JFinalAppConfig extends JFinalConfig {
         routes.add("/log", LogController.class);
         routes.add("/vote", VoteController.class);
         routes.add("/notice",NoticeController.class);
+        routes.add("/report", ReportController.class);
     }
 
     @Override
