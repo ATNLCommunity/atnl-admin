@@ -1,0 +1,27 @@
+协议说明:
+	参数兼容get、post的方式。
+	返回值是一个json格式的数据结构，例如{"data":[{"tdate":"2018-04-16","step":1000,"did":"589467020039582"},{"tdate":"2018-04-17","step":1000,"did":"589467020039640"}],"err":""}
+	err字段描述错误信息，当不为空的时候，即发生了错误，可以直接把err的字符串信息打印出来
+	data字段是根据不同协议返回的不同数据结构
+
+1.获取上报服务器地址
+	api：http://test.atunala.com/admin/report/server?sid=xxxx  该协议最少每天请求一次，以便同步配置
+	参数：sid 为设备码 如xxx
+	返回值: {"data":{"addr":"test.atunala.com","interval":60},"err":""}
+		addr: 为上报服务器地址
+		interval : 为上报时间间隔 分钟为单位
+
+2.获取设备列表
+	api：http://test.atunala.com/admin/report/report   其中域名地址有上面的协议1返回
+	参数：
+		sid : 设备名id
+		lon: 经度信息，是一个float浮点数转换成的字符串
+		lat: 纬度信息，是一个float浮点数转换成的字符串
+		step: 步数信息，是一个整形数
+		time: 是当前上报时间，格式为  2018-07-20 14:50:30
+		power: 当前电量百分比，整型
+		state: 状态，整形，0为正常，其他状态由设备厂商定义
+		sign: 签名信息，签名方式为 sid=aaa,lon=bbb,lat=ccc,step=ddd,power=eee,state=fff,time=ggg#signkey  进行的md5加密得到的hex字符串，signkey为签名密钥，目前为 "nb_shian&atnl@1340" -- 后期可能还会改，其中aaa，bbb，ccc...等都是相应的变量。中间用"#"连接。最后生成的签名为32个字节，如"5a213fbdc1ac0340e5ef2c8bf57b00d9", 注意字符串拼接的顺序
+	返回值: {"data":{},"err":""}
+		返回空的字符串。err为空即表示争取。
+	

@@ -1,9 +1,13 @@
 package com.app.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 
 import n.fw.base.BaseController;
 import n.fw.utils.SignUtils;
+import net.sf.json.JSONObject;
 
 public class ReportController extends BaseController
 {
@@ -18,8 +22,10 @@ public class ReportController extends BaseController
             return;
         }
 
-        String addr = "test.atunala.com";
-        success(addr);
+        JSONObject json = new JSONObject();
+        json.put("addr", "test.atunala.com");
+        json.put("interval", 60);
+        success(json);
     }
 
     public void report()
@@ -35,6 +41,9 @@ public class ReportController extends BaseController
         String lat = getPara("lat", "0");
 
         String step = getPara("step", "0");
+        String power = getPara("power", "0");
+        String state = getPara("state", "0");
+
         String time = getPara("time", "0");
 
         String sign = getPara("sign", "");
@@ -44,6 +53,8 @@ public class ReportController extends BaseController
         sb.append(",lon=" + lon);
         sb.append(",lat=" + lat);
         sb.append(",step=" + step);
+        sb.append(",power=" + power);
+        sb.append(",state=" + state);
         sb.append(",time=" + time);
         System.out.println(sb.toString());
 
