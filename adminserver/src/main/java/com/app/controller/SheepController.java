@@ -103,7 +103,7 @@ public class SheepController extends BaseController
         	error("该羊羔已经不存在了");
             return;
         }
-        if(sheep.getLong(Sheep.DID) > 0 && did != sheep.getLong(Sheep.DID))
+        if(null != sheep.getLong(Sheep.DID) && sheep.getLong(Sheep.DID) > 0 && did != sheep.getLong(Sheep.DID))
         {
         	Device device = Device.dao.findById(sheep.getLong(Sheep.DID));
         	if(null != device)
@@ -126,6 +126,12 @@ public class SheepController extends BaseController
     	}
     	sheep.set(Sheep.DID, did);
     	sheep.update();
+    	Device device = Device.dao.findById(did);
+    	if(null != device)
+    	{
+    		device.set(Device.BINDSTATE, 1);
+        	device.update();
+    	}
     	BasicRecord.dao.create(sheepid, weight, height, weight - sheep.getFloat(Sheep.WEIGHT), height - sheep.getFloat(Sheep.HEIGHT));
         
     	success(sheep);
