@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.app.model.BasicRecord;
+import com.app.model.Device;
 import com.app.model.DistanceRecord;
 import com.app.model.EventRecord;
 import com.app.model.GpsRecord;
@@ -75,19 +76,6 @@ public class SheepController extends BaseController
     }
     
     /**
-     * 添加羊
-     */
-    public void addSheep()
-    {
-    	if (!checkLevel(2))
-        {
-            errorInvalidOper();
-            return;
-        }
-    	
-    	
-    }
-    /**
      * 绑定设备
      */
     public void bindDevice()
@@ -114,6 +102,15 @@ public class SheepController extends BaseController
         {
         	error("该羊羔已经不存在了");
             return;
+        }
+        if(sheep.getLong(Sheep.DID) > 0 && did != sheep.getLong(Sheep.DID))
+        {
+        	Device device = Device.dao.findById(sheep.getLong(Sheep.DID));
+        	if(null != device)
+        	{
+        		device.set(Device.BINDSTATE, 0);
+            	device.update();
+        	}
         }
     	float weight = Float.parseFloat(getPara("weight",""));
     	if(weight <= 0f || sheep.getFloat(Sheep.WEIGHT) > weight)

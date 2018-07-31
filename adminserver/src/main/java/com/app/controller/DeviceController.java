@@ -32,6 +32,19 @@ public class DeviceController extends BaseController
         map.put("count", Device.dao.count(where));
         success(map);
     }
+    
+    /**
+     * 未绑定设备列表
+     */
+    public void getUnUseDevice()
+    {
+    	 if (!checkLevel(1))
+         {
+             errorInvalidOper();
+             return;
+         }
+    	 success(Device.dao.list());
+    }
 
     public void add()
     {

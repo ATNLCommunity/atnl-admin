@@ -22,11 +22,13 @@ public class Device extends Model<Device>
     public static final String DETAIL = "detail";       // 设备详情描述
     public static final String POWER = "power";         // 电量
     public static final String UPDATE_TIME = "update_time"; // 最后更新时间
+    public static final String BINDSTATE = "bindstate";
 
     public Device create(String name) 
     {
         Device device = new Device();
         device.set(NAME, name);
+        device.set(BINDSTATE, 0);
 
         if (device.save())
         {
@@ -39,6 +41,12 @@ public class Device extends Model<Device>
     {
         return findFirst("SELECT * FROM device WHERE name=? LIMIT 1", name);
     }
+    
+    public List<Device> list()
+    {
+        return find("SELECT * FROM device where bindstate = 0 limit 10");
+    }
+
 
     public String buildWhere(String name, String bindcode, String bindname)
     {
