@@ -2,6 +2,7 @@ package com.app.model;
 
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 
 import n.fw.utils.DateUtils;
@@ -52,5 +53,10 @@ public class StepRecord extends Model<StepRecord> {
     public List<StepRecord> getByMonth(Long sheepid,String date)
     {
     	return find("SELECT * FROM steprecord WHERE sheepid=? and YEAR(recordtime) = YEAR(?) and MONTH(recordtime) = MONTH(?)",sheepid,date,date);
+    }
+    
+    public Long getSum(Long sheepid)
+    {
+    	return Db.queryBigDecimal("select sum(steps) from steprecord where sheepid = ?",sheepid).longValue();
     }
 }

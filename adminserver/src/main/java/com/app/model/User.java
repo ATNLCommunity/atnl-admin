@@ -33,8 +33,12 @@ public class User extends Model<User> {
     public static final String M4 = "m4";               // m4级邀请数
     public static final String M5 = "m5";               // m5级邀请数
     public static final String M6 = "m6";               // m6级邀请数
+    public static final String M21 = "m21";
+    public static final String M31 = "m31";
     public static final String UPDATE_TIME = "update_time"; // 更新时间
     public static final String CREATE_TIME = "create_time"; // 注册时间
+    public static final String UTYPE = "utype";
+    public static final String LOGINTOKEN = "login_token";
 
     public User findByPhone(String phone) {
         return findFirst("SELECT * FROM user WHERE phone=?", phone);

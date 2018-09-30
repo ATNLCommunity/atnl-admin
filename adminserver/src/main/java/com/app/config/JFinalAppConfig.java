@@ -3,6 +3,7 @@ package com.app.config;
 import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.druid.wall.WallFilter;
 import com.app.controller.AdminController;
+import com.app.controller.AtnlPayController;
 import com.app.controller.DeviceController;
 import com.app.controller.InviteController;
 import com.app.controller.LogController;
@@ -15,12 +16,15 @@ import com.app.controller.SheepController;
 import com.app.controller.UploadController;
 import com.app.controller.UserController;
 import com.app.controller.VoteController;
+import com.app.controller.GoodsController;
 import com.app.model.Admin;
 import com.app.model.AtnlAddRecord;
+import com.app.model.AtnlPayRecord;
 import com.app.model.BasicRecord;
 import com.app.model.Device;
 import com.app.model.DistanceRecord;
 import com.app.model.EventRecord;
+import com.app.model.Goods;
 import com.app.model.GpsRecord;
 import com.app.model.Invite;
 import com.app.model.Log;
@@ -74,6 +78,8 @@ public class JFinalAppConfig extends JFinalConfig {
         routes.add("/vote", VoteController.class);
         routes.add("/notice",NoticeController.class);
         routes.add("/report", ReportController.class);
+        routes.add("/goods", GoodsController.class);
+        routes.add("/atnlpay",AtnlPayController.class);
     }
 
     @Override
@@ -115,6 +121,8 @@ public class JFinalAppConfig extends JFinalConfig {
         arp.addMapping("steprecord", StepRecord.class);
         arp.addMapping("eventrecord", EventRecord.class);
         arp.addMapping("notice", Notice.class);
+        arp.addMapping("goods", Goods.class);
+        arp.addMapping("atnlpayrecord", AtnlPayRecord.class);
     }
 
     @Override

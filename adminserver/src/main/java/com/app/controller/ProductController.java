@@ -63,8 +63,9 @@ public class ProductController extends BaseController
         String url = getPara("url", "");
         String send_date_desc = getPara("send_date_desc", "");
         String sendby = getPara("sendby", "");
+        Integer from_type = getParaToInt("from_type", 0);
 
-        Product product = Product.dao.create(oprice, price, eth, atnl, gift, lp, yf, count, type, usequan, name, logo, detail, url, sendDate, expireTime, send_date_desc, sendby);
+        Product product = Product.dao.create(oprice, price, eth, atnl, gift, lp, yf, count, type, usequan, name, logo, detail, url, sendDate, expireTime, send_date_desc, sendby,from_type);
         if (product != null)
         {
             Log.dao.add(getUid(), "product/create", "create product - id=" + product.getLong(Product.ID) + " type=" + type + " price=" + price + " eth=" + eth + " atnl=" + atnl + " count=" + count + " logo=" + logo + " detail=" + detail + " senddate" + sendDate + " expire_time=" + expireTime);
@@ -122,6 +123,8 @@ public class ProductController extends BaseController
         String sendDate = getPara("senddate", "");
         String send_date_desc = getPara("send_date_desc", "");
         String sendby = getPara("sendby", "");
+        Integer from_type = getParaToInt("from_type", 0);
+        product.set(Product.FROM_TYPE, from_type);
 
         if (StringUtils.isNotBlank(sendDate))
         {
