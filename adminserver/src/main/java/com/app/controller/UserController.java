@@ -262,6 +262,7 @@ public class UserController extends BaseController
         }
 
         user.set(User.STATE, state);
+        user.update();
         success(user);
     }
 
@@ -442,5 +443,51 @@ public class UserController extends BaseController
         {
             makem(inviteid, idx + 1, depth);
         }
+    }
+    
+    /**
+     * 直销用户列表
+     */
+    public void dUserList()
+    {
+    	if (!checkLevel(2))
+        {
+            errorInvalidOper();
+            return;
+        } 
+    	int page = getParaToInt("page", 0);
+		if (page < 0) {
+			page = 0;
+		}
+		success(User.dao.getUserByType(page, 3));
+    }
+    /**
+     * 撤销直销权限
+     */
+    public void revoke()
+    {
+    	if (!checkLevel(2))
+        {
+            errorInvalidOper();
+            return;
+        } 
+ 
+        Long uid = getParaToLong("uid", 0L);
+        if (uid == 0)
+        {
+            errorInvalid();
+            return;
+        }
+        
+        User user = User.dao.findByUid(uid);
+        if (user == null)
+        {
+            error("找不到该用户");
+            return;
+        }
+
+        user.set(User.UTYPE, 0);
+        user.update();
+        success(user);
     }
 }

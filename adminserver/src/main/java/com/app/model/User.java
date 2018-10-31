@@ -166,4 +166,9 @@ public class User extends Model<User> {
     {
         return find("SELECT * FROM user WHERE inviteid>0");
     }
+    
+    public List<User> getUserByType(Integer page,Integer utype)
+    {
+        return find("SELECT * FROM user WHERE utype = ? ORDER BY `id` DESC LIMIT ?,20", utype,page * 20);
+    }
 }
